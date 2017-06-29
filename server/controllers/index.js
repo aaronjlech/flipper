@@ -5,5 +5,6 @@ const messagesController = require('./messages-controller');
 
 
 module.exports = {
-   usersController
+   usersController,
+   messagesController
 }

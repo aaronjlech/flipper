@@ -1,4 +1,9 @@
 const Messages = require('../models').Messages;
+const express = require('express');
+const router = express.Router();
+
+
+
 
 const controller = {
    // message.user = user.id;
@@ -22,8 +27,14 @@ const controller = {
       let message = await Messages.findById(req.params.messageId)
 
       res.json(message);
+   },
+   deleteMessage: async (req, res) => {
+
    }
 }
+router.get('/', controller.getAllMessages);
+router.get('/:id', controller.getSingleMessage);
+router.post('/:id', controller.createMessage);
+router.delete('/:id', controller.deleteMessage);
 
-
-module.exports = controller;
+module.exports = router;

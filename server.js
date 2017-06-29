@@ -23,6 +23,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 app.use('/users', controller.usersController);
+app.use('/messages');
+
+
 const server = app.listen(3000, function() {
   const host = server.address().address;
   const port = server.address().port;

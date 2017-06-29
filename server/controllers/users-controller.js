@@ -35,16 +35,21 @@ const controller = {
       }else{
          res.send("you're not a user!");
       }
+   },
+   logoutUser: (req, res) => {
+      req.session.destroy();
+      res.status(200);
    }
 }
 
 
 
 router.get('/', controller.getAllUsers);
-
 router.get('/:id', controller.getSingleUser);
-
 
 router.post('/', controller.createUser);
 router.post('/login', controller.loginUser);
+router.post("/logout", controller.logoutUser);
+
+
 module.exports = router;
