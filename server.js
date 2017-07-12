@@ -11,19 +11,20 @@ const compiler = webpack(webpackConfig);
 
 app.use(express.static(__dirname + '/public'));
 
-// app.use(webpackDevMiddleware(compiler, {
-//   hot: true,
-//   filename: 'bundle.js',
-//   publicPath: '/',
-//   stats: {
-//     colors: true,
-//   },
-//   historyApiFallback: true,
-// }));
+app.use(webpackDevMiddleware(compiler, {
+  hot: true,
+  filename: 'bundle.js',
+  publicPath: '/',
+  stats: {
+    colors: true,
+  },
+  historyApiFallback: true,
+}));
 app.use(bodyParser.json());
 
 app.use('/users', controller.usersController);
-app.use('/messages');
+app.use('/message', controller.messagesController)
+// app.use('/messages');
 
 
 const server = app.listen(3000, function() {
@@ -32,3 +33,4 @@ const server = app.listen(3000, function() {
   console.log('Example app listening at http://%s:%s', host, port);
 });
 module.exports = app;
+const newApp = express();

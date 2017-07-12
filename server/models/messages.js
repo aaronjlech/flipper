@@ -4,12 +4,11 @@ module.exports = function(sequelize, DataTypes) {
     title: DataTypes.STRING,
     text_body: DataTypes.STRING,
     user: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
+  },
+      this.associate = function(models) {
         // associations can be defined here
       }
-    }
   });
   return Messages;
 };
+var findGreenStuff = 'green stuff';
