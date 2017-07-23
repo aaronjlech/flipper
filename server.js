@@ -1,10 +1,13 @@
 const express = require('express');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
 const validator = require('validator');
 const bodyParser = require('body-parser');
-const controller = require('./server/controllers/index');
+const mongoose = require('mongoose');
+const webpackConfig = require('./webpack.config.js');
+const models = require('./server/models');
+// const controller = require('./server/controllers/index');
+mongoose.connect('mongodb://localhost:27017/flipper_db');
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -22,8 +25,8 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(bodyParser.json());
 
-app.use('/users', controller.usersController);
-app.use('/message', controller.messagesController)
+// app.use('/users', controller.usersController);
+// app.use('/message', controller.messagesController)
 // app.use('/messages');
 
 
