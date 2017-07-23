@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const webpackConfig = require('./webpack.config.js');
 const models = require('./server/models');
-// const controller = require('./server/controllers/index');
+const controller = require('./server/controllers');
 mongoose.connect('mongodb://localhost:27017/flipper_db');
 
 const app = express();
@@ -25,7 +25,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(bodyParser.json());
 
-// app.use('/users', controller.usersController);
+app.use('/api/users', controller.usersController);
 // app.use('/message', controller.messagesController)
 // app.use('/messages');
 

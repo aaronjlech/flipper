@@ -1,40 +1,58 @@
-// const Messages = require('../models').Messages;
-// const express = require('express');
-// const router = express.Router();
-//
-//
-//
-//
-// const controller = {
-//    // message.user = user.id;
-//    // message.text_body = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident dolore aut earum deleniti, numquam!';
-//    // message.title = 'Im a title';
-//    createMessage: async (req, res) => {
-//       let userId = req.params.id;
-//       let message = await Messages.create({
-//             user: userId,
-//             title: req.body.title,
-//             text_body: req.body.text_body
-//       })
-//       res.json(message);
-//    },
-//    getAllMessages: async (req, res) => {
-//       let messages = await Messages.findAll();
-//
-//       res.json(messages);
-//    },
-//    getSingleMessage: async (req, res) => {
-//       let message = await Messages.findById(req.params.messageId)
-//
-//       res.json(message);
-//    },
-//    deleteMessage: async (req, res) => {
-//
-//    }
-// }
-// router.get('/', controller.getAllMessages);
-// router.get('/:id', controller.getSingleMessage);
-// router.post('/:id', controller.createMessage);
-// router.delete('/:id', controller.deleteMessage);
-//
-// module.exports = router;
+const Message = require('../models').Message;
+const User = require('../models').User;
+const router = require('express').Router();
+
+
+const controller = {
+   createMessage: (req, res) => {
+      let message = new Message(req.body.message);
+      message.save(function (err, newMessage) {
+         if (err) {
+            res.send(err);
+         } else {
+            res.send(newMessage);
+         }
+      });
+   },
+   findAllMessages: (req, res) => {
+     Message.find((err, messages) => {
+       if (err) {
+         res.status(500).send(err)
+       } else {
+         res.send(messages)
+       }
+     })
+   },
+   findMessagesByUser: (req, res) => {
+      res.send(req.user.messages);
+   },
+   deleteMessage: (req, res) => {
+     const { id } = req.params
+     Message.findByIdAndRemove(id, (err, message) => {
+        res.send(message)
+     })
+   }
+}
+router.param('userId', (req, res) => {
+   User.findById(req.params.userId, (err, user) => {
+      if(err) {
+         return next(err);
+      }
+      if(!user) {
+         err = new Error("User Not Found");
+      } else {
+         req.user = user;
+         return next();
+      }
+   })
+})
+
+router.get('/:userId', controller.findMessagesByUser);
+router.get('/:userId/edit/:messageId', controller.editMessage);
+router.get('/', controller.findAllMessages);
+router.get('/:messageId', controller.findOneMessage);
+router.post('/create/:userId', controller.createMessage);
+router.delete('remove/:id', controller.deleteMessage);
+
+
+module.exports = router;

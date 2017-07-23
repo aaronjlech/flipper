@@ -10,10 +10,10 @@ const likesSchema = new mongoose.Schema({
 
 
 
-const Likes = mongoose.model('Likes', likesSchema);
+const Like = mongoose.model('Like', likesSchema);
 
 
 module.exports = {
-   Likes,
+   Like,
    likesSchema
 }

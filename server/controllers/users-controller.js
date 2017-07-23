@@ -1,55 +1,72 @@
-// const User = require('../models').Users;
-// const express = require('express');
-//
-// const router = express.Router();
-// // user.username = 'username@mail.com';
-// // user.display_name = 'Billy';
-// // user.password = 'imacoolperson1';
-// const controller = {
-//    createUser: async (req, res) => {
-//       let user = await User.create({
-//             name: req.body.username,
-//             display_name: req.body.display_name,
-//             password: req.body.password
-//       })
-//       res.json( {
-//          username: user.username,
-//          display_name: user.display_name,
-//          password: user.password
-//       })
-//    },
-//    getAllUsers: async (req, res) => {
-//       let users = await User.findAll();
-//
-//       res.json(users);
-//    },
-//    getSingleUser: async (req, res) => {
-//       let user = await User.findById(req.params.userId)
-//
-//       res.json(user);
-//    },
-//    loginUser: async (req, res) => {
-//       let user = await User.findById(req.params.userId);
-//       if(user){
-//          res.json(user)
-//       }else{
-//          res.send("you're not a user!");
-//       }
-//    },
-//    logoutUser: (req, res) => {
-//       req.session.destroy();
-//       res.status(200);
-//    }
-// }
-//
-//
-//
-// router.get('/', controller.getAllUsers);
-// router.get('/:id', controller.getSingleUser);
-//
-// router.post('/', controller.createUser);
-// router.post('/login', controller.loginUser);
-// router.post("/logout", controller.logoutUser);
-//
-//
-// module.exports = router;
+const User = require('../models');
+const router = require('express').Router();
+const hashPassword = require("../hashPassword.js").hashPassword;
+
+
+const controller = {
+   createUser: (req, res) => {
+      const { password } = req.body.user
+      hashPassword(password, (hash) => {
+         let userData = req.body.user;
+         userData.password = hash;
+         let user = new User(userData);
+         user.save(function (err, newUser) {
+            if (err) {
+               res.send(err);
+            } else {
+               res.send(newUser);
+            }
+         });
+      })
+   },
+   findAllUsers: (req, res) => {
+     User.find((err, Users) => {
+       if (err) {
+         res.status(500).send(err)
+       } else {
+         res.send(Users)
+       }
+     })
+   },
+   findOneUser: (req, res) => {
+     const { id } = req.params
+     Mememinder.findById(id, (err, User) => {
+      if (err) {
+         res.status(500).send(err)
+      } else {
+         res.send(User)
+      }
+     })
+   },
+   deleteUser: (req, res) => {
+     const { id } = req.params
+     User.findByIdAndRemove(id, (err, User) => {
+        if(err){
+           res.status(500).send(err);
+        } else {
+           res.send(User)
+        }
+     })
+  },
+   editUser: (req, res) => {
+      const { id } = req.params
+
+      User.findById(id, (err, user) => {
+         if(err){
+            res.status(500).send(err);
+         } else {
+            res.send(user);
+         }
+      })
+   }
+}
+
+
+router.get('/', controller.findAllUsers);
+router.get('/:id', controller.findOneUser);
+router.put('/:id', controller.editUser);
+router.post('/', controller.createUser);
+router.delete('remove/:id', controller.deleteUser);
+
+
+module.exports = router;
