@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 
 const likesSchema = new mongoose.Schema({
    messageId: {type: String, required: true},
-   userId: {type: String, required: true},
-   username: {type: String, required: true}
+   _creator: { type: Number, ref: 'User' },
+   display_name: {type: String, required: true}
 })
 
 

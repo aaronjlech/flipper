@@ -11,14 +11,15 @@ function randomIntFromInterval(min,max)
 const userSchema = new mongoose.Schema({
 
    username: {type: String, required: true},
-   avatar_img: {type: String, required: true},
+   avatar_img: String,
    gender: {type: String, required: true},
    display_name: {type: String, required: true},
    password: {type: String, required: true},
-   messages: [messageSchema],
-   likes: [likesSchema]
+   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
 })
 userSchema.pre('save', function(next){
+   console.log(this);
    switch (this.gender) {
 
       case 'male':

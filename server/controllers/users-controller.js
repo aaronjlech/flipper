@@ -1,10 +1,11 @@
-const User = require('../models');
+const User = require('../models').User;
 const router = require('express').Router();
 const hashPassword = require("../hashPassword.js").hashPassword;
 
 
 const controller = {
    createUser: (req, res) => {
+      console.log(req.body);
       const { password } = req.body.user
       hashPassword(password, (hash) => {
          let userData = req.body.user;
