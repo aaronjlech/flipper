@@ -5,7 +5,9 @@ const router = require('express').Router();
 
 const controller = {
    createMessage: (req, res) => {
-      let message = new Message(req.body.message);
+      let messageData = req.body.message;
+      messageData._creator = req.user._id;
+      let message = new Message(messageData);
       message.save(function (err, newMessage) {
          if (err) {
             res.send(err);
@@ -15,13 +17,15 @@ const controller = {
       });
    },
    findAllMessages: (req, res) => {
-     Message.find((err, messages) => {
-       if (err) {
-         res.status(500).send(err)
-       } else {
-         res.send(messages)
-       }
-     })
+     Message.find()
+        .populate('_creator likes')
+        .exec((err, messages) => {
+          if (err) {
+            res.status(500).send(err)
+          } else {
+            res.send(messages)
+          }
+       })
    },
    findMessagesByUser: (req, res) => {
       res.send(req.user.messages);
@@ -33,7 +37,9 @@ const controller = {
      })
    }
 }
-router.param('userId', (req, res) => {
+
+
+router.param('userId', (req, res, next) => {
    User.findById(req.params.userId, (err, user) => {
       if(err) {
          return next(err);
@@ -48,9 +54,9 @@ router.param('userId', (req, res) => {
 })
 
 router.get('/:userId', controller.findMessagesByUser);
-router.get('/:userId/edit/:messageId', controller.editMessage);
+// router.get('/:userId/messages/:messageId', controller.editMessage);
 router.get('/', controller.findAllMessages);
-router.get('/:messageId', controller.findOneMessage);
+// router.get('/:messageId', controller.findOneMessage);
 router.post('/create/:userId', controller.createMessage);
 router.delete('remove/:id', controller.deleteMessage);
 

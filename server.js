@@ -26,7 +26,7 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(bodyParser.json());
 
 app.use('/api/users', controller.usersController);
-// app.use('/message', controller.messagesController)
+app.use('/api/messages', controller.messagesController)
 // app.use('/messages');
 
 

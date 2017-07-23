@@ -4,10 +4,9 @@ const likesSchema = require('./Like').likesSchema;
 
 const messageSchema = new mongoose.Schema({
      _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-     display_name: { type: String },
      createdAt: {type: Date, default: Date.now},
      updatedAt: {type: Date, default: Date.now},
-     body: { type: String },
+     body: { type: String, required: true },
      likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
 });
 
