@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
 })
+
 userSchema.pre('save', function(next){
    console.log(this);
    switch (this.gender) {

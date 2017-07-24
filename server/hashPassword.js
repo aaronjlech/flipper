@@ -11,8 +11,6 @@ module.exports = {
       });
    },
    checkPassword: (password, hash) => {
-      return bcrypt.compare(password, hash, (err, res) => {
-         return res;
-      })
+      return bcrypt.compare(password, hash)
    }
 }

@@ -1,7 +1,7 @@
 const User = require('../models').User;
 const router = require('express').Router();
 const hashPassword = require("../hashPassword.js").hashPassword;
-
+const checkPassword = require('../hashPassword').checkPassword;
 
 const controller = {
    createUser: (req, res) => {
@@ -20,24 +20,41 @@ const controller = {
          });
       })
    },
+
    findAllUsers: (req, res) => {
-     User.find((err, Users) => {
+     User.find((err, users) => {
        if (err) {
          res.status(500).send(err)
        } else {
-         res.send(Users)
+         res.send(users)
        }
      })
    },
    findOneUser: (req, res) => {
      const { id } = req.params
-     Mememinder.findById(id, (err, User) => {
+     User.findById(id, (err, user) => {
       if (err) {
          res.status(500).send(err)
       } else {
-         res.send(User)
+
+
       }
      })
+   },
+   loginUser: (req, res) => {
+      const { username, password } = req.body.user;
+      User.find({username}).then((err, user) => {
+         if(err){
+            res.status(500).send(err);
+         } else {
+            checkPassword(password, user.password)
+               .then(isCorrect => {
+                  if(isCorrect) {
+                     res.send(user)
+                  }
+               })
+         }
+      })
    },
    deleteUser: (req, res) => {
      const { id } = req.params
@@ -67,6 +84,7 @@ router.get('/', controller.findAllUsers);
 router.get('/:id', controller.findOneUser);
 router.put('/:id', controller.editUser);
 router.post('/', controller.createUser);
+router.post('/login', controller.loginUser);
 router.delete('remove/:id', controller.deleteUser);
 
 
