@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
    display_name: {type: String, required: true},
    password: {type: String, required: true},
    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+   friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
 })
 

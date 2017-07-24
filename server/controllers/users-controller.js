@@ -44,7 +44,7 @@ const controller = {
    loginUser: (req, res) => {
 
       const { username, password } = req.body.user;
-      User.findOne({username}, (err, user) => {
+      User.findOne({ username }, (err, user) => {
          if(err){
 
             res.status(500).send(err);
@@ -54,8 +54,9 @@ const controller = {
                .then(isCorrect => {
                   console.log(isCorrect);
                   if(isCorrect) {
-                     const { username, avatar_img, gender, display_name, messages, likes} = user;
+                     const { _id, username, avatar_img, gender, display_name, messages, likes} = user;
                      let userInfo = {
+                        _id,
                         username,
                         avatar_img,
                         gender,

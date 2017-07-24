@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 app.use('/api/users', controller.usersController);
 app.use('/api/messages', controller.messagesController)
-// app.use('/messages');
+app.use('/api/likes', controller.likesController);
 
 
 const server = app.listen(3000, function() {
