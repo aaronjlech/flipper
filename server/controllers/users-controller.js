@@ -42,15 +42,31 @@ const controller = {
      })
    },
    loginUser: (req, res) => {
+
       const { username, password } = req.body.user;
-      User.find({username}).then((err, user) => {
+      User.findOne({username}, (err, user) => {
          if(err){
+
             res.status(500).send(err);
          } else {
+            console.log(password);
             checkPassword(password, user.password)
                .then(isCorrect => {
+                  console.log(isCorrect);
                   if(isCorrect) {
-                     res.send(user)
+                     const { username, avatar_img, gender, display_name, messages, likes} = user;
+                     let userInfo = {
+                        username,
+                        avatar_img,
+                        gender,
+                        display_name,
+                        messages,
+                        likes
+                     };
+
+                     res.send(userInfo)
+                  }else {
+                     res.send('wrong password or username');
                   }
                })
          }
