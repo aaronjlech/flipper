@@ -83,6 +83,4 @@ router.put('/send/:userId/friend/:friendId', controller.sendRequest);
 router.put('/accept/:userId/friend/:friendId', controller.acceptRequest);
 router.put('/decline/:userId/request/:requestId/', controller.declineRequest);
 
-
-
 module.exports = router;
