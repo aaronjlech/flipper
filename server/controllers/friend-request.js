@@ -45,9 +45,9 @@ const controller = {
 
    },
    declineRequest: (req, res) => {
-      req.user.friend_requests.findByIdAndRemove(req.params.requestId, (err, serverRes) => {
-         if(err) res.status(500).send(err);
-         res.send('request declined');
+      req.user.friend_requests.splice(req.params.requestId, 1)
+      req.user.save((err, updatedUser) => {
+         res.send('declined request');
       })
    }
 }
@@ -81,7 +81,7 @@ router.param('friendId', (req, res, next) => {
 
 router.put('/send/:userId/friend/:friendId', controller.sendRequest);
 router.put('/accept/:userId/friend/:friendId', controller.acceptRequest);
-router.delete('/decline/:userId/request/:requestId/', controller.declineRequest);
+router.put('/decline/:userId/request/:requestId/', controller.declineRequest);
 
 
 

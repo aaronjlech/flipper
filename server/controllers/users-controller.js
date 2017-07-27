@@ -35,7 +35,6 @@ const controller = {
          res.status(500).send(err)
       } else {
 
-
       }
      })
    },
