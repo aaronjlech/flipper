@@ -7,13 +7,17 @@ const router = require('express').Router();
 
 const controller = {
    createLike: (req, res) => {
-      console.log("creating like")
       let likeData = {
-         _messge: req.message._id,
-         _creator: req.user._id
+         _message: req.message._id,
+         _creator: req.user.display_name
       }
       let like = new Like(likeData);
-      like.save(function (err, newLike) {
+      like.save( (err, newLike) => {
+         console.log(newLike);
+         req.message.likes.push(newLike._id)
+         req.user.likes.push(newLike._id)
+         req.user.save();
+         req.message.save();
          console.log(err, newLike);
          if (err) {
             res.send(err);
@@ -80,7 +84,7 @@ router.param('messageId', (req, res, next) => {
 router.get('/', controller.findAllLikes);
 router.get('/:id', controller.findOneLike);
 router.post('/user/:userId/message/:messageId', controller.createLike);
-router.delete('remove/:id', controller.deleteLike);
+router.delete('/remove/:id', controller.deleteLike);
 
 
 module.exports = router;

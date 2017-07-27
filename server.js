@@ -26,9 +26,9 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(bodyParser.json());
 
 app.use('/api/users', controller.usersController);
-app.use('/api/messages', controller.messagesController)
+app.use('/api/messages', controller.messagesController);
 app.use('/api/likes', controller.likesController);
-
+app.use('/api/friends', controller.friendsController);
 
 const server = app.listen(3000, function() {
   const host = server.address().address;

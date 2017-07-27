@@ -22,13 +22,11 @@ const controller = {
    },
 
    findAllUsers: (req, res) => {
-     User.find((err, users) => {
-       if (err) {
-         res.status(500).send(err)
-       } else {
-         res.send(users)
-       }
-     })
+     User.find()
+         .populate("likes friend_requests sent_requests friends")
+         .exec((err, users) => {
+            res.send(users);
+         })
    },
    findOneUser: (req, res) => {
      const { id } = req.params
@@ -102,7 +100,7 @@ router.get('/:id', controller.findOneUser);
 router.put('/:id', controller.editUser);
 router.post('/', controller.createUser);
 router.post('/login', controller.loginUser);
-router.delete('remove/:id', controller.deleteUser);
+router.delete('/remove/:id', controller.deleteUser);
 
 
 module.exports = router;

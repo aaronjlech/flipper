@@ -15,11 +15,7 @@ var config = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: ['babel'],
-     },
-     {
-     test: /\.scss$/,
-     loaders: ["style-loader", "css-loader", "sass-loader"]
-   }
+     }
     ],
   },
 

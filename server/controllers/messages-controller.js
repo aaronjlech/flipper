@@ -18,8 +18,10 @@ const controller = {
    },
    findAllMessages: (req, res) => {
      Message.find()
-        .populate('_creator likes')
+        .populate('likes _creator')
         .exec((err, messages) => {
+           console.log(messages);
+         //   messages.likes.populate('_creator')
           if (err) {
             res.status(500).send(err)
           } else {
@@ -58,7 +60,7 @@ router.get('/:userId', controller.findMessagesByUser);
 router.get('/', controller.findAllMessages);
 // router.get('/:messageId', controller.findOneMessage);
 router.post('/create/:userId', controller.createMessage);
-router.delete('remove/:id', controller.deleteMessage);
+router.delete('/remove/:id', controller.deleteMessage);
 
 
 module.exports = router;

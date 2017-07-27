@@ -3,20 +3,22 @@ const mongoose = require('mongoose');
 const messageSchema = require('./Message').messageSchema;
 const likesSchema = require('./Like').likesSchema;
 
-function randomIntFromInterval(min,max)
-{
+function randomIntFromInterval(min,max){
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 const userSchema = new mongoose.Schema({
 
-   username: {type: String, required: true},
+   username: {type: String, required: true, unique: true},
    avatar_img: String,
    gender: {type: String, required: true},
    display_name: {type: String, required: true},
    password: {type: String, required: true},
-   messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
    friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+   messages: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+   friend_requests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+   sent_requests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
 })
 
