@@ -26,7 +26,7 @@ export default class Login extends Component {
       const { username, password } = this.state;
       return(
          <div className="login container">
-            <h1 className="flipr">Flipr</h1>
+            <h1 className="flippr">Flippr</h1>
             <form onSubmit={this.handleLogin} style={{textAlign: 'center', backgroundColor: "fff", borderRadius: "4px"}}>
                <TextInput
                   key="username-login"
@@ -48,8 +48,8 @@ export default class Login extends Component {
                   label="Login"
                   type="submit"
                   backgroundColor = "#4DD0E1"
-                  labelStyle={{
-                     borderRadius: "5px",
+                  style={{
+                     borderRadius: "40px",
                      color: "#FFF"
                   }}
                />

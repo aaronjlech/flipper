@@ -5,7 +5,7 @@ export default (props) => {
 
     return (
         <TextField
-
+         type={props.type}
          floatingLabelText={props.label}
          name={props.name}
          value={props.value}
