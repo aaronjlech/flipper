@@ -1,4 +1,3 @@
-const Like = require('../models').Like;
 const Message = require('../models').Message;
 const User = require('../models').User;
 
@@ -6,51 +5,33 @@ const router = require('express').Router();
 
 
 const controller = {
-   createLike: (req, res) => {
-      let likeData = {
-         _message: req.message._id,
-         _creator: req.user.display_name
-      }
-      let like = new Like(likeData);
-      like.save( (err, newLike) => {
-         console.log(newLike);
-         req.message.likes.push(newLike._id)
-         req.user.likes.push(newLike._id)
-         req.user.save();
-         req.message.save();
-         console.log(err, newLike);
-         if (err) {
-            res.send(err);
+   handleLike: (req, res) => {
+      const { message, user } = req
+      let userIndex = user.likes.indexOf(message._id);
+      let messageIndex = messsage.likes.indexOf(user._id);
+
+         if(userIndex > -1 && messageIndex > -1){
+            message.likes.push(messageIndex, 1)
+            user.likes.splice(userIndex, 1)
+            user.save();
+            message.save((err, updatedMessage) => {
+               if(err) return res.status(500).send(err)
+
+               return res.send(updatedMessage);
+            });
          } else {
-            res.send(newLike);
+            message.likes.push(user._id)
+            user.likes.push(message._id)
+            user.save();
+            message.save((err, updatedMessage) => {
+               if(err) return res.status(500).send(err)
+
+               return res.send(updatedMessage);
+            });
          }
       });
-   },
-   findAllLikes: (req, res) => {
-     Like.find((err, likes) => {
-       if (err) {
-         res.status(500).send(err)
-       } else {
-         res.send(likes)
-       }
-     })
-   },
-   findOneLike: (req, res) => {
-     const { id } = req.params
-     Like.findById(id, (err, like) => {
-      if (err) {
-         res.status(500).send(err)
-      } else {
-         res.send(like)
-      }
-     })
-   },
-   deleteLike: (req, res) => {
-     const { id } = req.params
-     Like.findByIdAndRemove(id, (err, like) => {
-      res.send(like)
-     })
    }
+
 }
 
 router.param('userId', (req, res, next) => {
@@ -81,10 +62,7 @@ router.param('messageId', (req, res, next) => {
    })
 })
 
-router.get('/', controller.findAllLikes);
-router.get('/:id', controller.findOneLike);
-router.post('/user/:userId/message/:messageId', controller.createLike);
-router.delete('/remove/:id', controller.deleteLike);
+router.put('/user/:userId/message/:messageId', controller.handleLike);
 
 
 module.exports = router;
