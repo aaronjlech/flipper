@@ -7,7 +7,8 @@ const messageSchema = new mongoose.Schema({
      createdAt: {type: Date, default: Date.now},
      updatedAt: {type: Date, default: Date.now},
      body: { type: String, required: true },
-     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
+     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }],
+     comments: []
 });
 
 
