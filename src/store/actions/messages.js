@@ -1,4 +1,4 @@
-import { messages } from '../../services'
+import { messages, likes } from '../../services'
 
 
 const requestMessages = () => {
@@ -26,7 +26,7 @@ const shouldFetchMessages = (state) => {
 const fetchMessages = () => (dispatch) => {
    dispatch(requestMessages)
    return messages.getAllMessages()
-            .then(data => receiveMessages(data))
+            .then(data => dispatch(receiveMessages(data)))
 }
 
 const fetchMessagesIfNeeded = () => {
@@ -37,12 +37,18 @@ const fetchMessagesIfNeeded = () => {
   }
 }
 
-const createMessage = (messageData) => {
+const createMessage = (userId, messageData) => {
    return (dispatch) => {
-      messages.createMessage(messageData.userId, messageData.data)
-         .then(res => dispatch(fetchMessages))
+      messages.createMessage(userId, messageData)
+         .then(res => dispatch(fetchMessages()))
    }
+}
 
+const handleLike = (userId, messageId) => {
+   return (dispatch) => {
+      likes.handleLike(userId, messageId)
+         .then(res => dispatch(fetchMessages()))
+   }
 }
 
 export {
@@ -51,5 +57,6 @@ export {
    createMessage,
    fetchMessages,
    shouldFetchMessages,
-   fetchMessagesIfNeeded
+   fetchMessagesIfNeeded,
+   handleLike
 }

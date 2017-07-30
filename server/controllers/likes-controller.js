@@ -29,7 +29,6 @@ const controller = {
                return res.send(updatedMessage);
             });
          }
-      });
    }
 
 }
