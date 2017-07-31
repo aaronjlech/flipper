@@ -1,8 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const messageSchema = require('./Message').messageSchema;
-const likesSchema = require('./Like').likesSchema;
-
+const DmSchema = require('./DirectMessage').DmSchema;
 function randomIntFromInterval(min,max){
     return Math.floor(Math.random()*(max-min+1)+min);
 }
@@ -14,7 +12,7 @@ const userSchema = new mongoose.Schema({
    gender: {type: String, required: true},
    display_name: {type: String, required: true},
    password: {type: String, required: true},
-   direct_messages: {type: mongoose.Schema.Types.ObjectId, ref: "DirectMessage"},
+   direct_messages: [DmSchema],
    friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
    messages: [{type: mongoose.Schema.Types.ObjectId, ref: "Message"}],
    friend_requests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],

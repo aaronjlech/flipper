@@ -37,4 +37,12 @@ export function removeMessage(messageId) {
    axios.delete(`/api/messages/remove/${messageId}`)
 }
 
+export function createComment(messageId, commentData) {
+   axios.put(`/api/comments/create/${messageId}`, {
+         comment: commentData
+      })
+      .then(res => res.data)
+      .catch(err => err)
+}
+
 // [[[* END MESSAGES *]]]

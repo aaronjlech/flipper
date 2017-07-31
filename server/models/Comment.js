@@ -9,7 +9,6 @@ const CommentSchema = new mongoose.Schema({
         updatedAt: {type: Date, default: Date.now},
         body: { type: String, required: true },
         likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-   });
 })
 const Comment = mongoose.model('Comment', CommentSchema);
 

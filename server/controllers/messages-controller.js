@@ -26,7 +26,7 @@ const controller = {
             res.send(updatedMessage);
          }
       })
-   }
+   },
    findAllMessages: (req, res) => {
      Message.find()
         .populate('likes _creator')

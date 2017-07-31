@@ -19,14 +19,19 @@ const controller = {
          });
       })
    },
+   sendDirectMessage: (req, res) => {
+
+   },
 
    findAllUsers: (req, res) => {
       console.log('executing')
-     User.find()
-         .then((err, users) => {
-            console.log(users)
-            res.send(users);
-         })
+     User.find((err, users) => {
+        if(err) return res.send(err)
+        res.send(users)
+
+
+     })
+
    },
    findOneUser: (req, res) => {
      const { id } = req.params
