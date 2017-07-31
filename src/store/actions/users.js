@@ -40,3 +40,14 @@ const updateUser = (updatedUser) => {
     return users.updateUser(updatedUser)
   }
 }
+
+
+
+export default {
+   requestUser,
+   receiveUser,
+   updateUser,
+   fetchUserIfNeeded,
+   shouldFetchUser,
+
+}

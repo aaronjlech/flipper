@@ -44,6 +44,13 @@ const createMessage = (userId, messageData) => {
    }
 }
 
+const createComment = (messageId, commentData) => {
+   return (dispatch) => {
+      messages.createComment(messageId, commentData)
+         .then(res => dispatch(fetchMessages()))
+   }
+}
+
 const handleLike = (userId, messageId) => {
    return (dispatch) => {
       likes.handleLike(userId, messageId)
@@ -51,12 +58,13 @@ const handleLike = (userId, messageId) => {
    }
 }
 
-export {
+export default {
    requestMessages,
    receiveMessages,
    createMessage,
    fetchMessages,
    shouldFetchMessages,
    fetchMessagesIfNeeded,
+   createComment,
    handleLike
 }

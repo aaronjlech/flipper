@@ -69,7 +69,7 @@ const controller = {
 
                      res.send(userInfo)
                   }else {
-                     res.send('wrong password or username');
+                     res.status(401).send('wrong password or username');
                   }
                })
          }

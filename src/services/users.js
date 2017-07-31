@@ -24,7 +24,10 @@ export function loginUser(data) {
    axios.post('/api/users/login', {
          user: data
       })
-      .then(res => res.data)
+      .then(res => {
+         localStorage.setItem('userData', JSON.stringify(res.data)
+         localStorage.setItem('isLoggedIn', true);
+      })
       .catch(err => err)
 }
 // [[* GET ONE USER *]]
