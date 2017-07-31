@@ -6,7 +6,7 @@ import axios from 'axios'
 // /api/users
 export function getAllUsers() {
    axios.get('/api/users')
-      .then((res) => res.data)
+      .then((res) => console.log(res))
       .catch(err => err)
 }
 //[[* CREATE USER *]]
@@ -29,7 +29,7 @@ export function loginUser(data) {
 }
 // [[* GET ONE USER *]]
 // /api/users/:id
-export function getAllUsers(userId) {
+export function getUserById(userId) {
    axios.get(`/api/users/${userId}`)
       .then((res) => res.data)
       .catch(err => err)

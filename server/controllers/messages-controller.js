@@ -16,6 +16,17 @@ const controller = {
          }
       });
    },
+   createComment: (req, res) => {
+      let commentData = req.body.comment;
+      req.message.comments.push(commentData)
+      req.message.save((err, updatedMessage) => {
+         if(err) {
+            res.send(err);
+         } else {
+            res.send(updatedMessage);
+         }
+      })
+   }
    findAllMessages: (req, res) => {
      Message.find()
         .populate('likes _creator')
@@ -54,12 +65,26 @@ router.param('userId', (req, res, next) => {
       }
    })
 })
+router.param('messageId', (req, res, next) => {
+   User.findById(req.params.messageId, (err, message) => {
+      if(err) {
+         return next(err);
+      }
+      if(!message) {
+         err = new Error("Message Not Found");
+      } else {
+         req.message = message;
+         return next();
+      }
+   })
+})
 
 router.get('/:userId', controller.findMessagesByUser);
 // router.get('/:userId/messages/:messageId', controller.editMessage);
 router.get('/', controller.findAllMessages);
 // router.get('/:messageId', controller.findOneMessage);
 router.post('/create/:userId', controller.createMessage);
+router.put('/comments/create/:messageId', controller.createComment)
 router.delete('/remove/:id', controller.deleteMessage);
 
 

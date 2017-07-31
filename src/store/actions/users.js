@@ -1,17 +1,19 @@
-export function requestUser () {
+import { users } from '../../services'
+
+const requestUser = () => {
   return {
-    type: 'REQUEST_USERS'
+    type: 'REQUEST_USER'
   }
 }
 
-export function receiveUser (user) {
+const receiveUser = (user) => {
   return {
-    type: 'RECEIVE_USERS',
+    type: 'RECEIVE_USER',
     user: user
   }
 }
 
-export function shouldFetchUser (state) {
+const shouldFetchUser = (state) => {
   if(!state.user) {
     return true
   }
@@ -19,8 +21,13 @@ export function shouldFetchUser (state) {
     return false
   }
 }
+const fetchUser = (userId) => {
+   return (dispatch) => {
+      return users.getUserById(userId)
+   }
+}
 
-export function fetchUserIfNeeded () {
+const fetchUserIfNeeded = () => {
   return (dispatch, getState) => {
     if(shouldFetchUser(getState())) {
       return dispatch(fetchUser())
@@ -28,22 +35,8 @@ export function fetchUserIfNeeded () {
   }
 }
 
-function updateUser (updatedUser) {
+const updateUser = (updatedUser) => {
   return (dispatch) => {
     return users.updateUser(updatedUser)
-  }
-}
-
-function createUserFromInvite (state, urlParams) {
-  return (dispatch, getState) => {
-    return users.processInvite(urlParams.inviteHash)
-      .then(res => {
-        if(res.status === 'expired') {
-          dispatch(inviteFailure(res))
-        } else {
-          dispatch(inviteSuccess(res))
-        }
-
-      })
   }
 }

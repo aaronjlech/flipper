@@ -2,7 +2,6 @@ const User = require('../models').User;
 const router = require('express').Router();
 const hashPassword = require("../hashPassword.js").hashPassword;
 const checkPassword = require('../hashPassword').checkPassword;
-
 const controller = {
    createUser: (req, res) => {
       console.log(req.body);
@@ -22,9 +21,10 @@ const controller = {
    },
 
    findAllUsers: (req, res) => {
+      console.log('executing')
      User.find()
-         .populate("likes friend_requests sent_requests friends")
-         .exec((err, users) => {
+         .then((err, users) => {
+            console.log(users)
             res.send(users);
          })
    },

@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const likesSchema = require('./Like').likesSchema;
+const CommentSchema = require('./Comment').CommentSchema;
 
 const messageSchema = new mongoose.Schema({
      _creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -8,7 +8,7 @@ const messageSchema = new mongoose.Schema({
      updatedAt: {type: Date, default: Date.now},
      body: { type: String, required: true },
      likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-     comments: []
+     comments: [CommentSchema]
 });
 
 

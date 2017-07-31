@@ -14,12 +14,12 @@ const userSchema = new mongoose.Schema({
    gender: {type: String, required: true},
    display_name: {type: String, required: true},
    password: {type: String, required: true},
-   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+   direct_messages: {type: mongoose.Schema.Types.ObjectId, ref: "DirectMessage"},
    friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-   messages: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+   messages: [{type: mongoose.Schema.Types.ObjectId, ref: "Message"}],
    friend_requests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
    sent_requests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Like' }]
+   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }]
 })
 
 userSchema.pre('save', function(next){
