@@ -117,9 +117,9 @@ const controller = {
 }
 
 
-router.get('/', isLoggedIn, controller.findAllUsers);
-router.get('/:id', isLoggedIn, controller.findOneUser);
-router.put('/:id', isLoggedIn, controller.editUser);
+router.get('/', controller.findAllUsers);
+router.get('/:id', controller.findOneUser);
+router.put('/:id', controller.editUser);
 router.post('/', controller.createUser, controller.loginUser);
 router.post('/login', controller.loginUser);
 router.delete('/remove/:id', controller.deleteUser);

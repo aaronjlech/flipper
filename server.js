@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const webpackConfig = require('./webpack.config.js');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
 
 const models = require('./server/models');
 const controller = require('./server/controllers');
@@ -34,6 +33,7 @@ app.use(bodyParser.json());
 app.use(session({secret: 'theresomethingonthewing'}))
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 app.use('/api/users', controller.usersController);
 app.use('/api/messages', controller.messagesController);
