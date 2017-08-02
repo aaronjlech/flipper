@@ -2,22 +2,32 @@ const User = require('../models').User;
 const router = require('express').Router();
 const hashPassword = require("../hashPassword.js").hashPassword;
 const checkPassword = require('../hashPassword').checkPassword;
+const isLoggedIn = require('../middlewares')
+
 const controller = {
-   createUser: (req, res) => {
-      console.log(req.body);
+   createUser: (req, res, next) => {
       const { password } = req.body.user
-      hashPassword(password, (hash) => {
-         let userData = req.body.user;
-         userData.password = hash;
-         let user = new User(userData);
-         user.save(function (err, newUser) {
-            if (err) {
-               res.send(err);
-            } else {
-               res.send(newUser);
-            }
-         });
+      User.findOne({ username: req.body.user.username}, (err, foundUser) => {
+         if(foundUser) {
+            return res.send('username already exists')
+         } else {
+            hashPassword(password, (hash) => {
+               let userData = req.body.user;
+               userData.password = hash;
+               let user = new User(userData);
+               user.save(function (err, newUser) {
+                  if (err) {
+                     res.send(err);
+                  } else {
+                     console.log(req.body.user)
+                     req.body.user = {username: req.body.user.username, password}
+                     return next()
+                  }
+               });
+            })
+         }
       })
+
    },
    sendDirectMessage: (req, res) => {
 
@@ -44,14 +54,18 @@ const controller = {
      })
    },
    loginUser: (req, res) => {
-
+      // console.log(req.body.user)
       const { username, password } = req.body.user;
       User.findOne({ username }, (err, user) => {
+         // console.log(user);
          if(err){
 
             res.status(500).send(err);
          } else {
-            console.log(password);
+            console.log('-------')
+            // console.log(password, user.password);
+            console.log('-------')
+
             checkPassword(password, user.password)
                .then(isCorrect => {
                   console.log(isCorrect);
@@ -74,6 +88,10 @@ const controller = {
                })
          }
       })
+   },
+   logoutUser: (req, res) => {
+      req.logout();
+      res.redirect('/');
    },
    deleteUser: (req, res) => {
      const { id } = req.params
@@ -99,10 +117,10 @@ const controller = {
 }
 
 
-router.get('/', controller.findAllUsers);
-router.get('/:id', controller.findOneUser);
-router.put('/:id', controller.editUser);
-router.post('/', controller.createUser);
+router.get('/', isLoggedIn, controller.findAllUsers);
+router.get('/:id', isLoggedIn, controller.findOneUser);
+router.put('/:id', isLoggedIn, controller.editUser);
+router.post('/', controller.createUser, controller.loginUser);
 router.post('/login', controller.loginUser);
 router.delete('/remove/:id', controller.deleteUser);
 

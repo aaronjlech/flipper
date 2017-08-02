@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TextInput from '../../components/TextInput';
 import FlatButton from 'material-ui/FlatButton';
-
+import { users } from '../../services'
 
 
 
@@ -19,7 +19,12 @@ export default class Login extends Component {
 
    handleLogin = (evt) => {
       evt.preventDefault();
-      console.log(this.state);
+      users.createNewUser({
+         username: 'shafffdefeffe3@mail.com',
+         display_name: "Shayla",
+         password: '123',
+         gender: "female"
+      }).then(res => console.log(res))
    }
 
    render(){

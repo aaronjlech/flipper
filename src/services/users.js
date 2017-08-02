@@ -12,7 +12,7 @@ export function getAllUsers() {
 //[[* CREATE USER *]]
 // /api/users
 export function createNewUser(data) {
-   axios.post('/api/users', {
+   return axios.post('/api/users', {
          user: data
       })
    .then(res => res.data)
@@ -25,7 +25,7 @@ export function loginUser(data) {
          user: data
       })
       .then(res => {
-         localStorage.setItem('userData', JSON.stringify(res.data)
+         localStorage.setItem('userData', JSON.stringify(res.data));
          localStorage.setItem('isLoggedIn', true);
       })
       .catch(err => err)

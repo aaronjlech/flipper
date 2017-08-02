@@ -10,6 +10,7 @@ const controller = {
       user.sent_requests.push(friend._id);
       friend.friend_requests.push(user._id);
       friend.save((err, updatedUser) => {
+
          if (err) res.status(500).send(err);
       })
       user.save((err, updatedUser) => {
