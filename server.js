@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const webpackConfig = require('./webpack.config.js');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const models = require('./server/models');
 const controller = require('./server/controllers');

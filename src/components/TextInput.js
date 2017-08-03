@@ -10,6 +10,7 @@ export default (props) => {
          name={props.name}
          value={props.value}
          onChange={props.handleChange}
+         style={{display: 'block', margin: '0 auto'}}
         />
     );
   }
