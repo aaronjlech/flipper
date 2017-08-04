@@ -12,6 +12,11 @@ const receiveUser = (user) => {
     user: user
   }
 }
+const loginUser = (user) => {
+   return (dispatch) => {
+      users.loginUser
+   }
+}
 
 const shouldFetchUser = (state) => {
   if(!state.user) {

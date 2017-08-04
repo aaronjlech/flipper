@@ -23,10 +23,18 @@ const shouldFetchMessages = (state) => {
   }
 }
 
+const couldNotReceiveMessages = (error) => {
+   return {
+      type: "FETCH_FAILURE",
+      error
+   }
+}
+
 const fetchMessages = () => (dispatch) => {
    dispatch(requestMessages)
    return messages.getAllMessages()
-            .then(data => dispatch(receiveMessages(data)))
+                  .then(data => dispatch(receiveMessages(data)))
+                  .catch(err => dispatch(couldNotReceiveMessages(err)))
 }
 
 const fetchMessagesIfNeeded = () => {

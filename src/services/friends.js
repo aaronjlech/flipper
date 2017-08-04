@@ -8,9 +8,7 @@ import axios from 'axios';
 // /api/friends/send/:userId/friend/:friendId
 
 export function sendFriendRequest(userId, friendId) {
-   axios.put(`api/friends/send/${userId}/friend/${friendId}`)
-      .then(res => res.data)
-      .catch(err => err)
+   return axios.put(`api/friends/send/${userId}/friend/${friendId}`)
 }
 // [[ * decline request * ]]
 //this will remove the request from the recepiant but not the sender
@@ -18,18 +16,14 @@ export function sendFriendRequest(userId, friendId) {
 // /api/friends/decline/:userId/request/:requestId
 
 export function declineFriendRequest(userId, requestId) {
-   axios.put(`api/friends/decline/${userId}/request/${requestId}`)
-      .then(res => res.data)
-      .catch(err => err)
+   return axios.put(`api/friends/decline/${userId}/request/${requestId}`)
 }
 // [[ * accept request * ]]
 
 // /api/friends/accept/:userId/friend/:friendId
 
 export function acceptFriendRequest(userId, friendId){
-   axios.put(`api/friends/accept/${userId}/friend/${friendId}`)
-      .then(res => res.data)
-      .catch(err => err)
+   return axios.put(`api/friends/accept/${userId}/friend/${friendId}`)
 }
 
 

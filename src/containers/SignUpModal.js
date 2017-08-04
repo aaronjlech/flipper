@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import TextInput from '../components/TextInput'
 
 const customContentStyle = {
   width: '100%',
@@ -20,18 +22,40 @@ export default class SignUpModal extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         open: false
+         open: false,
+         username: '',
+         password: '',
+         gender: 'none',
+         repeatPassword: '',
+         display_name: '',
+         disableSubmit: true
       }
    }
    handleOpen = () => {
- this.setState({open: true});
-};
+      this.setState({open: true});
+   };
+   handleSelect = (evt, index, value) => {
+      this.setState({gender: value})
+   }
 
-handleClose = () => {
- this.setState({open: false});
-};
+   handleClose = () => {
+      this.setState({open: false});
+   };
+   handleChange = (evt) => {
+      console.log(evt.target.name)
+      this.setState({[evt.target.name] : evt.target.value})
+   }
+   handleSubmit = (evt) => {
+      evt.preventDefault();
+
+      if(disableSubmit) {
+         return
+      }
+      console.log('submittin')
+   }
 
 render() {
+   const { username, password, repeatPassword, display_name, gender } = this.state
  const actions = [
     <FlatButton
      label="Cancel"
@@ -39,9 +63,10 @@ render() {
      onTouchTap={this.handleClose}
     />,
     <FlatButton
-     label="SignUp"
-     primary={true}
-     onTouchTap={this.handleClose}
+      label="Sign Up"
+      primary={true}
+      disabled={true}
+      onTouchTap={this.handleSubmit}
     />,
  ];
 
@@ -55,7 +80,53 @@ render() {
         contentStyle={customContentStyle}
         open={this.state.open}
      >
-        This dialog spans the entire width of the screen.
+      <form onSubmit={this.handleSubmit}>
+         <TextInput
+            key="username-signup"
+            label="Username"
+            type="text"
+            name="username"
+            value={username}
+            handleChange={this.handleChange}
+         />
+         <TextInput
+            key="display_name-signup"
+            label="Display Name"
+            type="text"
+            name="display_name"
+            value={display_name}
+            handleChange={this.handleChange}
+         />
+         <TextInput
+            key="password-signup"
+            label="password"
+            type="password"
+            name="password"
+            value={password}
+            handleChange={this.handleChange}
+         />
+         <TextInput
+            key="repeatPassword-signup"
+            label="repeat password"
+            type="password"
+            name="password"
+            value={repeatPassword}
+            handleChange={this.handleChange}
+         />
+         <SelectField
+            style={{display: 'block', margin: '0 auto'}}
+            floatingLabelText="Gender"
+            floatingLabelStyle={{top: '20px'}}
+            value={gender}
+            name='gender'
+            onChange={this.handleSelect}
+>
+ <MenuItem value={'none'} primaryText="I choose not To Specify" />
+ <MenuItem value={'female'} primaryText='Female' />
+ <MenuItem value={'male'} primaryText="Male" />
+</SelectField>
+      </form>
+
      </Dialog>
     </div>
  );

@@ -7,42 +7,34 @@ import axios from 'axios'
 
 // /api/messages/:userId
 export function getSingleMessage(userId) {
-   axios.get(`/api/messages/${userId}`)
-      .then(res => res.data)
-      .catch(err =>  err)
+   return axios.get(`/api/messages/${userId}`)
 }
 
 //GET ALL MESSAGES
 
 // /api/messages
 export function getAllMessages() {
-   axios.get(`/api/messages`)
-      .then(res => res.data)
-      .catch(err => err)
+   return axios.get(`/api/messages`)
 }
 //POST MESSAGE
 
 // /api/messages/create/:userId
 export function createMessage(userId, data) {
-   axios.post(`/api/messages/create/${userId}`, {
+   return axios.post(`/api/messages/create/${userId}`, {
          message: data
       })
-      .then(res => res.data)
-      .catch(err => err)
 }
 //DELETE MESSAGE
 
 // /api/messages/remove/:id
 export function removeMessage(messageId) {
-   axios.delete(`/api/messages/remove/${messageId}`)
+   return axios.delete(`/api/messages/remove/${messageId}`)
 }
 
 export function createComment(messageId, commentData) {
-   axios.put(`/api/comments/create/${messageId}`, {
+   return axios.put(`/api/comments/create/${messageId}`, {
          comment: commentData
       })
-      .then(res => res.data)
-      .catch(err => err)
 }
 
 // [[[* END MESSAGES *]]]

@@ -10,6 +10,7 @@ const AllUsers = (state = {
         isFetching: false,
         allUsers: action.allUsers
       })
+
     default:
       return state
   }
@@ -17,7 +18,9 @@ const AllUsers = (state = {
 
 const User = (state = {
   isFetching: false,
-  user: {}
+  isLoggedIn: false,
+  error: null
+  user: {},
 }, action) => {
   switch (action.type) {
     case 'REQUEST_USER':
@@ -27,6 +30,14 @@ const User = (state = {
         isFetching: false,
         user: action.user
       })
+    case 'LOGIN_FAILURE':
+      return Object.assign({}, state, {
+          error: action.error
+      })
+    case 'SIGNUP_FAILURE':
+       return Object.assign({}, state, {
+          error: action.error
+       })
     default:
       return state
   }

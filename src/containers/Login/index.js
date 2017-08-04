@@ -9,6 +9,7 @@ const loginBoxStyles = {
    padding: '20px 10px',
    backgroundColor: 'rgba(255, 255, 255, .9)',
    width: '80%',
+   minWidth: '300px',
    margin: '0 auto'
 }
 
