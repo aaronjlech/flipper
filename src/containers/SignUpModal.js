@@ -6,6 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextInput from '../components/TextInput'
 
+import validator from 'validator';
+
 const customContentStyle = {
   width: '100%',
   maxWidth: 'none'
@@ -28,7 +30,6 @@ export default class SignUpModal extends Component {
          gender: 'none',
          repeatPassword: '',
          display_name: '',
-         disableSubmit: true
       }
    }
    handleOpen = () => {
@@ -43,19 +44,23 @@ export default class SignUpModal extends Component {
    };
    handleChange = (evt) => {
       console.log(evt.target.name)
-      this.setState({[evt.target.name] : evt.target.value})
+      const {username, display_name, password, repeatPassword, gender} = this.state;
+         this.setState({[evt.target.name] : evt.target.value, disableSubmit: true})
+
    }
    handleSubmit = (evt) => {
+      const {username, display_name, password, repeatPassword, gender} = this.state;
       evt.preventDefault();
-
-      if(disableSubmit) {
-         return
-      }
+      if(
+         validator.isEmail(username) &&
+         validator.is
+      )
       console.log('submittin')
    }
 
 render() {
    const { username, password, repeatPassword, display_name, gender } = this.state
+
  const actions = [
     <FlatButton
      label="Cancel"
@@ -65,7 +70,7 @@ render() {
     <FlatButton
       label="Sign Up"
       primary={true}
-      disabled={true}
+      disabled={(username && display_name && password && repeatPassword && gender) ? false : true}
       onTouchTap={this.handleSubmit}
     />,
  ];
@@ -83,7 +88,7 @@ render() {
       <form onSubmit={this.handleSubmit}>
          <TextInput
             key="username-signup"
-            label="Username"
+            label="Email"
             type="text"
             name="username"
             value={username}
@@ -109,7 +114,7 @@ render() {
             key="repeatPassword-signup"
             label="repeat password"
             type="password"
-            name="password"
+            name="repeatPassword"
             value={repeatPassword}
             handleChange={this.handleChange}
          />
@@ -120,11 +125,11 @@ render() {
             value={gender}
             name='gender'
             onChange={this.handleSelect}
->
- <MenuItem value={'none'} primaryText="I choose not To Specify" />
- <MenuItem value={'female'} primaryText='Female' />
- <MenuItem value={'male'} primaryText="Male" />
-</SelectField>
+         >
+             <MenuItem value={'none'} primaryText="I choose not To Specify" />
+             <MenuItem value={'female'} primaryText='Female' />
+             <MenuItem value={'male'} primaryText="Male" />
+         </SelectField>
       </form>
 
      </Dialog>

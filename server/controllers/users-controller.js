@@ -9,7 +9,7 @@ const controller = {
       const { password } = req.body.user
       User.findOne({ username: req.body.user.username}, (err, foundUser) => {
          if(foundUser) {
-            return res.send('username already exists')
+            return res.status(400).send('username already exists')
          } else {
             hashPassword(password, (hash) => {
                let userData = req.body.user;
@@ -60,7 +60,7 @@ const controller = {
          // console.log(user);
          if(err){
 
-            res.status(500).send(err);
+            res.status(400).send('wrong password or username');
          } else {
             console.log('-------')
             // console.log(password, user.password);
@@ -83,7 +83,7 @@ const controller = {
 
                      res.send(userInfo)
                   }else {
-                     res.status(401).send('wrong password or username');
+                     res.status(400).send('wrong password or username');
                   }
                })
          }

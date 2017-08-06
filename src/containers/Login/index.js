@@ -28,12 +28,7 @@ export default class Login extends Component {
 
    handleLogin = (evt) => {
       evt.preventDefault();
-      users.createNewUser({
-         username: 'shafffdefeffe3@mail.com',
-         display_name: "Shayla",
-         password: '123',
-         gender: "female"
-      }).then(res => console.log(res))
+
    }
 
    render(){
@@ -46,7 +41,7 @@ export default class Login extends Component {
 
                      <TextInput
                         key="username-login"
-                        label="Username"
+                        label="Email"
                         type="text"
                         name="username"
                         value={username}

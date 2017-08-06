@@ -12,9 +12,37 @@ const receiveUser = (user) => {
     user: user
   }
 }
+
+const signupFailure = (error) => {
+   return {
+      type: 'SIGNUP_FAILURE',
+      error
+   }
+}
+const loginFailure = (error) => {
+   return {
+      type: 'LOGIN_FAILURE',
+      error
+   }
+}
+
+
+
 const loginUser = (user) => {
+   dispatch(requestUser)
    return (dispatch) => {
-      users.loginUser
+      users.loginUser(user)
+         .then(res => dispatch(receiveUser(res.data)))
+         .catch(err => dispatch(loginFailure(err)))
+   }
+}
+
+const signupUser = (userData) => {
+   dispatch(requestUser)
+   return (dispatch) => {
+      users.createNewUser(userData)
+         .then(res => dispatch(receiveUser(res.data)))
+         .catch(err => dispatch(signupFailure(err)))
    }
 }
 
