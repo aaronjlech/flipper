@@ -27,11 +27,14 @@ export default class Login extends Component {
    }
 
    handleLogin = (evt) => {
+      const { loginUser } = this.props;
+      const {username, password } = this.state;
       evt.preventDefault();
-
+      loginUser({username, password})
    }
 
    render(){
+      console.log(this.props);
       const { username, password } = this.state;
       return(
          <div className="login container">
@@ -68,7 +71,7 @@ export default class Login extends Component {
                      />
                </form>
             </Paper>
-            <SignUpModal />
+            <SignUpModal {...this.props}/>
          </div>
       )
    }

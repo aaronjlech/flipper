@@ -20,24 +20,25 @@ const signupFailure = (error) => {
    }
 }
 const loginFailure = (error) => {
+   console.log(error.data);
    return {
       type: 'LOGIN_FAILURE',
       error
    }
 }
 const loginUser = (user) => {
-   dispatch(requestUser)
    return (dispatch) => {
-      users.loginUser(user)
+      dispatch(requestUser)
+      return users.loginUser(user)
          .then(res => dispatch(receiveUser(res.data)))
          .catch(err => dispatch(loginFailure(err)))
    }
 }
 
 const signupUser = (userData) => {
-   dispatch(requestUser)
    return (dispatch) => {
-      users.createNewUser(userData)
+      dispatch(requestUser)
+      return users.createNewUser(userData)
          .then(res => dispatch(receiveUser(res.data)))
          .catch(err => dispatch(signupFailure(err)))
    }
@@ -67,7 +68,7 @@ const fetchUserIfNeeded = () => {
 
 const updateUser = (updatedUser) => {
   return (dispatch) => {
-    return users.updateUser(updatedUser)
+   return users.updateUser(updatedUser)
   }
 }
 
@@ -77,6 +78,10 @@ export default {
    requestUser,
    receiveUser,
    updateUser,
+   loginFailure,
+   loginUser,
+   signupUser,
+   signupFailure,
    fetchUserIfNeeded,
    shouldFetchUser,
 

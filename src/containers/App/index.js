@@ -14,13 +14,14 @@ class App extends Component {
    }
 
    render(){
+      console.log(this.props);
       return(
          <div>
             <h1>Hey from the router</h1>
             <HashRouter>
                <Switch>
                   {/* ALL CONTAINERS GET STORE/STATE AS PROPS */}
-                  <Route exact path="/" render={(props) => <Login {...props}/>}/>
+                  <Route exact path="/" render={() => <Login {...this.props}/>}/>
                   <Route/>
                </Switch>
             </HashRouter>
@@ -33,6 +34,7 @@ function mapStateToProps(state){
       ...state
    }
 }
+
 function mapDispatchToProps(dispatch){
    return bindActionCreators(actions, dispatch)
 }

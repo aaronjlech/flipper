@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { indigoA700, cyanA100 } from 'material-ui/styles/colors';
-
+import * as services from './services';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -18,7 +18,7 @@ const muiTheme = getMuiTheme({
   }
 });
 injectTapEventPlugin();
-
+services.users.getAllUsers().then(res => console.log(res))
 class Main extends Component {
 
     render(){

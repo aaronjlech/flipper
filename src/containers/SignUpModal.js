@@ -49,16 +49,19 @@ export default class SignUpModal extends Component {
 
    }
    handleSubmit = (evt) => {
+      const { signupUser } = this.props;
       const {username, display_name, password, repeatPassword, gender} = this.state;
       evt.preventDefault();
-      if(
-         validator.isEmail(username) &&
-         validator.is
-      )
-      console.log('submittin')
+      signupUser({
+         username,
+         display_name,
+         password,
+         gender
+      })
    }
 
 render() {
+   console.log(this.props)
    const { username, password, repeatPassword, display_name, gender } = this.state
 
  const actions = [
