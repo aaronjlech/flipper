@@ -41,7 +41,7 @@ const User = (state = {
           error: action.error
        })
     case 'LOGIN_FAILURE':
-       reutn Object.assign({}, state, {
+       return Object.assign({}, state, {
           error: action.error
        })
     default:

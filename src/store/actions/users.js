@@ -25,9 +25,6 @@ const loginFailure = (error) => {
       error
    }
 }
-
-
-
 const loginUser = (user) => {
    dispatch(requestUser)
    return (dispatch) => {

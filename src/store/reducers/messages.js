@@ -17,4 +17,4 @@ const Messages = (state = {
 
 
 
-export Messages
+export default Messages
