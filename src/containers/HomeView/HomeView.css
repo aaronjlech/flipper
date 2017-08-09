@@ -1,0 +1,15 @@
+.post {
+   display: flex;
+
+}
+.post__image {
+   flex: 1;
+   margin: 1.4rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.post__text {
+   flex: 2;
+}

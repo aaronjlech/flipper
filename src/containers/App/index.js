@@ -27,7 +27,7 @@ class App extends Component {
                   <Switch>
                      {/* ALL CONTAINERS GET STORE/STATE AS PROPS */}
                      <Route exact path="/" render={() => <Login {...this.props}/>}/>
-                     <Route/>
+                     <Route exact path ='/home' render={() => <HomeView {...this.props} />}/>
                   </Switch>
                </HashRouter>
          )
