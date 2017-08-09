@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper'
 import { users } from '../../services';
 import SignUpModal from '../SignUpModal';
-
+import './Login.css';
 const loginBoxStyles = {
    padding: '20px 10px',
    backgroundColor: 'rgba(255, 255, 255, .9)',

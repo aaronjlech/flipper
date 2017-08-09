@@ -41,7 +41,7 @@ app.use('/api/messages', controller.messagesController);
 app.use('/api/likes', controller.likesController);
 app.use('/api/friends', controller.friendsController);
 
-const server = app.listen(3000, function() {
+const server = app.listen(3001, function() {
   const host = server.address().address;
   const port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);
