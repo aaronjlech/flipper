@@ -5,7 +5,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-
 //COMPONENTS
 import Login from '../Login';
 import HomeView from '../HomeView';
@@ -23,11 +22,11 @@ class App extends Component {
          )
       } else {
          return(
-               <HashRouter>
+               <HashRouter history={[]}>
                   <Switch>
                      {/* ALL CONTAINERS GET STORE/STATE AS PROPS */}
-                     <Route exact path="/" render={() => <Login {...this.props}/>}/>
-                     <Route exact path ='/home' render={() => <HomeView {...this.props} />}/>
+                     <Route exact match path="/" render={(props) => <Login {...props} {...this.props}/>}/>
+                     <Route exact path ='/home' render={(props) => <HomeView {...props} {...this.props} />}/>
                   </Switch>
                </HashRouter>
          )

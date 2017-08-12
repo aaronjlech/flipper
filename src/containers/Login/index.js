@@ -27,10 +27,11 @@ export default class Login extends Component {
    }
 
    handleLogin = (evt) => {
-      const { loginUser } = this.props;
+      const { loginUser, history } = this.props;
       const {username, password } = this.state;
       evt.preventDefault();
       loginUser({username, password})
+      history.push('/home');
    }
 
    render(){
