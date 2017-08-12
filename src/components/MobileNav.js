@@ -1,13 +1,21 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import FontIcon from 'material-ui/FontIcon';
-import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+
+const styles = {
+   position: 'fixed',
+   bottom: '0',
+   width: '100%',
+   backgroundColor: 'black'
+}
+
 
 const TabsExampleIcon = () => (
-  <Tabs>
-    <Tab icon={<FontIcon className="muidocs-icon-action-home" />} />
-    <Tab icon={<ActionFlightTakeoff />} />
-    <Tab icon={<FontIcon className="fa fa-plus"/>} />
+  <Tabs style={styles}>
+    <Tab icon={<FontIcon className="material-icons" >face</FontIcon>} />
+    <Tab icon={<FontIcon className="material-icons">home</FontIcon>} />
+    <Tab icon={<FontIcon className="material-icons">add</FontIcon>} />
+
   </Tabs>
 );
 

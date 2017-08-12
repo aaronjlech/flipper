@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import TextInput from '../../components/TextInput';
-import RaisedButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper'
 import { users } from '../../services';
 import SignUpModal from '../SignUpModal';
 import './Login.css';
+
 const loginBoxStyles = {
    padding: '20px 10px',
    backgroundColor: 'rgba(255, 255, 255, .9)',
@@ -63,7 +64,7 @@ export default class Login extends Component {
                      <RaisedButton
                         label="Login"
                         type="submit"
-                        backgroundColor = "#2962FF"
+                        primary={true}
                         style={{
                            marginTop: '20px',
                            borderRadius: "40px",

@@ -7,7 +7,6 @@ import AppBar from 'material-ui/AppBar';
  */
 const NavBar = () => (
   <AppBar
-     style={{background: '#000'}}
     title="Flippr"
     titleStyle={{textAlign: 'center'}}
     iconClassNameRight="muidocs-icon-navigation-expand-more"
