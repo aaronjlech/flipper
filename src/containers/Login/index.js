@@ -31,7 +31,7 @@ export default class Login extends Component {
       const { loginUser, history } = this.props;
       const {username, password } = this.state;
       evt.preventDefault();
-      loginUser({username, password})
+      loginUser({username, password}, history)
       history.push('/home');
    }
 

@@ -7,7 +7,7 @@ const requestUser = () => {
     type: 'REQUEST_USER'
   }
 }
-
+history.push('/')
 const receiveUser = (user) => {
   return {
     type: 'RECEIVE_USER',

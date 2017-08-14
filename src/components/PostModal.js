@@ -1,10 +1,11 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
+import Avatar from 'material-ui/Avatar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const customContentStyle = {
-  width: '40%',
+  width: '90%',
   maxWidth: 'none',
 };
 
@@ -13,33 +14,61 @@ const customContentStyle = {
  */
 export default class PostModal extends React.Component {
 
+   constructor(props) {
+      super(props)
+      this.state = {
+         message: ''
+      }
+   }
 
+   handleChange = (evt) => {
+      this.setState({message: evt.target.value})
+   }
+   handleClose = () => {
+      this.setState({message: ''})
+      this.props.handleClose()
 
+   }
 
   render() {
+      const { message } = this.state;
+      const wordLength = 170 - message.length;
+      const isFilled = wordLength <= 170 && message.length > 0 && wordLength > 0
+      console.log(isFilled)
     const actions = [
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.props.handleClose}
+        onTouchTap={this.handleClose}
       />,
       <FlatButton
         label="Submit"
         primary={true}
-        onTouchTap={this.props.handleClose}
+        disabled={!isFilled}
+        onTouchTap={this.handleClose}
       />,
     ];
 
     return (
       <div>
         <Dialog
-          title="Dialog With Custom Width"
           actions={actions}
           modal={true}
           contentStyle={customContentStyle}
           open={this.props.showModal}
         >
-          This dialog spans the entire width of the screen.
+         <div className="message__user-info">
+             <div className="user-info__avatar">
+                 <Avatar src="https://randomuser.me/api/portraits/lego/4.jpg" size={50}/>
+             </div>
+             <div className="user-info__content">
+                 <h4>@Bill</h4>
+                 <p className="content__word-length">{wordLength}</p>
+             </div>
+         </div>
+         <form onSubmit={this.handleSubmit}>
+            <textarea disabled={message.length === 170} name="message" id="messageForm" cols="30" rows="10" placeholder="what's on your mind?" onChange={this.handleChange}></textarea>
+         </form>
         </Dialog>
       </div>
     );

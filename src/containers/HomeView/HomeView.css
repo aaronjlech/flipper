@@ -2,6 +2,14 @@
    display: flex;
    padding: 1rem;
 }
+.nav-bar{
+   position: fixed;
+   width: 100%;
+   top: 0;
+}
+.home{
+   padding-top: 64px;
+}
 .post__image {
    flex: 1;
    margin-right: .7rem;
@@ -9,7 +17,13 @@
    justify-content: center;
    align-items: center;
 }
+.message__user-info {
+   display: flex;
 
+}
+.content__word-length {
+   margin: 0;
+}
 .post__text {
    flex: 2;
    font-size: .8rem;
