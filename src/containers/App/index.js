@@ -22,7 +22,7 @@ class App extends Component {
          )
       } else {
          return(
-               <HashRouter history={[]}>
+               <HashRouter>
                   <Switch>
                      {/* ALL CONTAINERS GET STORE/STATE AS PROPS */}
                      <Route exact match path="/" render={(props) => <Login {...props} {...this.props}/>}/>

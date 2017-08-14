@@ -19,6 +19,10 @@ export default class HomeView extends Component {
             <div className="post_container">
                <Post username='Bill' likes={0} key='0'/>
                <Post username='Bill' likes={0} key='50'/>
+               <Post username='Bill' likes={0} key='540'/>
+               <Post username='Bill' likes={0} key='5ff0'/>
+               <Post username='Bill' likes={0} key='5asdfas0'/>
+               <Post username='Bill' likes={0} key='5aaa0'/>
 
             </div>
             <MobileNav/>

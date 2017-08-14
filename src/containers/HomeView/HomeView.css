@@ -24,6 +24,9 @@
 .content__word-length {
    margin: 0;
 }
+.post_container {
+   overflow: scroll;
+}
 .post__text {
    flex: 2;
    font-size: .8rem;
