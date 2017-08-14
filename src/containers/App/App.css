@@ -1,0 +1,7 @@
+.thin__italics {
+   font-weight: 300 !important;
+   font-style: italic;
+}
+.post__time{
+   margin: .4em 0;
+}

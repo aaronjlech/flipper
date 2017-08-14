@@ -1,10 +1,10 @@
 .post {
    display: flex;
-
+   padding: 1rem;
 }
 .post__image {
    flex: 1;
-   margin: 1.4rem;
+   margin-right: .7rem;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -12,7 +12,22 @@
 
 .post__text {
    flex: 2;
+   font-size: .8rem;
 }
+.post__username {
+   color: #304FFE;
+   margin: 0 0 .6em;
+}
+
 .mobile-nav {
    background: #FFF;
+}
+.post__social {
+   font-size: 13px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.post__social .post__likes {
+   flex: 1;
 }
