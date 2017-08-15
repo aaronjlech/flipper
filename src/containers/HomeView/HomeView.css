@@ -48,3 +48,8 @@
 .post__social .post__likes {
    flex: 1;
 }
+
+
+.user-card {
+   position: relative;
+}

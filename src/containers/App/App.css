@@ -5,3 +5,18 @@
 .post__time{
    margin: .4em 0;
 }
+
+.flex {
+   display: flex;
+}
+.center {
+   justify-content: center;
+}
+input {
+   box-shadow: none !important;
+   color: blue;
+}
+
+input :focus {
+   box-shadow: none !important;
+}
