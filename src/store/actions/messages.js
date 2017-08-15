@@ -45,10 +45,11 @@ const fetchMessagesIfNeeded = () => {
   }
 }
 
-const createMessage = (userId, messageData) => {
+const createMessage = (messageData) => {
    return (dispatch) => {
-      messages.createMessage(userId, messageData)
+      messages.createMessage(messageData)
          .then(res => dispatch(fetchMessages()))
+         .catch(err => dispatch(couldNotReceiveMessages(err)))
    }
 }
 
@@ -59,10 +60,11 @@ const createComment = (messageId, commentData) => {
    }
 }
 
-const handleLike = (userId, messageId) => {
+const handleLike = (messageId) => {
    return (dispatch) => {
       likes.handleLike(userId, messageId)
          .then(res => dispatch(fetchMessages()))
+         .catch(res => dispatch(couldNotReceiveMessages(err)))
    }
 }
 

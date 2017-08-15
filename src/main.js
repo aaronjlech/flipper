@@ -21,7 +21,7 @@ const muiTheme = getMuiTheme({
 
 });
 injectTapEventPlugin();
-services.users.getAllUsers().then(res => console.log(res))
+
 class Main extends Component {
 
     render(){

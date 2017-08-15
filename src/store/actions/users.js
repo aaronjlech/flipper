@@ -1,7 +1,6 @@
 import { users } from '../../services'
-import createHistory from 'history/createHashHistory';
+import history from '../../history';
 
-const history = createHistory();
 const requestUser = () => {
   return {
     type: 'REQUEST_USER'

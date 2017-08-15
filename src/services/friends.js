@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { getToken } from './auth';
 // **** [[[[ FRIENDS API ]]]] ****
 // all friends routes are PUT routes
 // [[* SEND REQUEST *]]
@@ -7,10 +7,10 @@ import axios from 'axios';
 
 // /api/friends/send/:userId/friend/:friendId
 
-export function sendFriendRequest(friendId, token) {
+export function sendFriendRequest(friendId) {
    return axios.put(`api/friends/send/${friendId}`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
 
       }
    })
@@ -20,10 +20,10 @@ export function sendFriendRequest(friendId, token) {
 
 // /api/friends/decline/:userId/request/:requestId
 
-export function declineFriendRequest(requestId, token) {
+export function declineFriendRequest(requestId) {
    return axios.put(`api/friends/decline/${userId}/request/${requestId}`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
 
       }
    })
@@ -32,10 +32,10 @@ export function declineFriendRequest(requestId, token) {
 
 // /api/friends/accept/:userId/friend/:friendId
 
-export function acceptFriendRequest(userId, friendId){
+export function acceptFriendRequest(friendId){
    return axios.put(`api/friends/accept/${userId}/friend/${friendId}`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
 
       }
    })

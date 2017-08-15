@@ -4,7 +4,7 @@ import actions from '../../store/actions';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import history from '../../history';
 //COMPONENTS
 import Login from '../Login';
 import HomeView from '../HomeView';
@@ -22,7 +22,7 @@ class App extends Component {
          )
       } else {
          return(
-               <HashRouter>
+               <HashRouter history={history}>
                   <Switch>
                      {/* ALL CONTAINERS GET STORE/STATE AS PROPS */}
                      <Route exact match path="/" render={(props) => <Login {...props} {...this.props}/>}/>

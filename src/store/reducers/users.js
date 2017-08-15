@@ -1,3 +1,5 @@
+import jwtDecode from 'jwt-decode';
+
 const AllUsers = (state = {
   isFetching: false,
   allUsers: []
@@ -27,10 +29,13 @@ const User = (state = {
     case 'REQUEST_USER':
       return Object.assign({}, state, { isFetching: true })
     case 'RECEIVE_USER':
+      const { token } = action.user
+      let userData = jwtDecode(token);
       return Object.assign({}, state, {
         isFetching: false,
         isLoggedIn: true,
-        user: action.user
+        token,
+        user: userData.user
       })
     case 'LOGIN_FAILURE':
       return Object.assign({}, state, {

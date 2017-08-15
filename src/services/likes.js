@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken } from './auth';
 // **** [[[* MESSAGES API *]]] ****
 
 //POST LIKE
@@ -7,7 +8,7 @@ import axios from 'axios'
 export default function handleLike(messageId, token) {
    return axios.put(`/api/likes/message/${messageId}`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
       }
    })
 }

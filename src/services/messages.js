@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { getToken } from './auth';
 // **** [[[* MESSAGES API *]]] ****
 
 //
@@ -9,7 +9,7 @@ import axios from "axios";
 export function getSingleMessage(userId, token) {
    return axios.get(`/api/messages/${userId}`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
       }
    });
 }
@@ -20,7 +20,7 @@ export function getSingleMessage(userId, token) {
 export function getAllMessages(token) {
    return axios.get(`/api/messages`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
       }
    });
 }
@@ -32,7 +32,7 @@ export function createMessage(data) {
       `/api/messages/create`,
       {
          headers: {
-            authorization: `Bearer ${token}`
+            authorization: `Bearer ${getToken()}`
          }
       },
       {
@@ -43,20 +43,20 @@ export function createMessage(data) {
 //DELETE MESSAGE
 
 // /api/messages/remove/:id
-export function removeMessage(messageId, token) {
+export function removeMessage(messageId) {
    return axios.delete(`/api/messages/remove/${messageId}`, {
       headers: {
-         authorization: `Bearer ${token}`
+         authorization: `Bearer ${getToken()}`
       }
    });
 }
 
-export function createComment(messageId, commentData, token) {
+export function createComment(messageId, commentData) {
    return axios.put(
       `/api/comments/create/${messageId}`,
       {
          headers: {
-            authorization: `Bearer ${token}`
+            authorization: `Bearer ${getToken()}`
          }
       },
       {
