@@ -1,6 +1,6 @@
 const Message = require('../models').Message;
 const User = require('../models').User;
-
+const { ensureAuthenticated } = require('../middlewares/jwt')
 const router = require('express').Router();
 
 
@@ -60,7 +60,7 @@ router.param('messageId', (req, res, next) => {
       }
    })
 })
-
+router.use(ensureAuthenticated)
 router.put('/user/:userId/message/:messageId', controller.handleLike);
 
 

@@ -31,7 +31,10 @@ const loginUser = (user) => {
    return (dispatch) => {
       dispatch(requestUser)
       return users.loginUser(user)
-         .then(res => dispatch(receiveUser(res.data)))
+         .then(res => {
+            history.push('/home')
+            return dispatch(receiveUser(res.data))
+         })
          .catch(err => dispatch(loginFailure(err)))
    }
 }

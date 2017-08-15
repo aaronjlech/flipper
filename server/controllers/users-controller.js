@@ -1,8 +1,8 @@
 const User = require('../models').User;
 const router = require('express').Router();
+const { createToken, ensureAuthenticated } = require('../middlewares/jwt')
 const hashPassword = require("../hashPassword.js").hashPassword;
 const checkPassword = require('../hashPassword').checkPassword;
-const isLoggedIn = require('../middlewares')
 
 const controller = {
    createUser: (req, res, next) => {
@@ -56,7 +56,7 @@ const controller = {
    loginUser: (req, res) => {
       // console.log(req.body.user)
       const { username, password } = req.body.user;
-      User.findOne({ username }, (err, user) => {
+      User.findOne({ username }, '+password', (err, user) => {
          // console.log(user);
          if(err){
 
@@ -70,18 +70,29 @@ const controller = {
                .then(isCorrect => {
                   console.log(isCorrect);
                   if(isCorrect) {
-                     const { _id, username, avatar_img, gender, display_name, messages, likes} = user;
-                     let userInfo = {
-                        _id,
-                        username,
-                        avatar_img,
-                        gender,
-                        display_name,
+                     const {
                         messages,
-                        likes
-                     };
-
-                     res.send(userInfo)
+                        likes,
+                        display_name,
+                        username,
+                        friend_requests,
+                        direct_messages,
+                        friends,
+                        _id,
+                        gender
+                     } = user
+                     let userInfo = {
+                        messages,
+                        likes,
+                        display_name,
+                        username,
+                        friend_requests,
+                        direct_messages,
+                        friends,
+                        _id,
+                        gender
+                     }
+                     res.send({token: createToken(userInfo)})
                   }else {
                      res.status(400).send('wrong password or username');
                   }
@@ -117,12 +128,12 @@ const controller = {
 }
 
 
-router.get('/', controller.findAllUsers);
-router.get('/:id', controller.findOneUser);
-router.put('/:id', controller.editUser);
+router.get('/', ensureAuthenticated, controller.findAllUsers);
+router.get('/:id', ensureAuthenticated, controller.findOneUser);
+router.put('/:id', ensureAuthenticated, controller.editUser);
 router.post('/', controller.createUser, controller.loginUser);
 router.post('/login', controller.loginUser);
-router.delete('/remove/:id', controller.deleteUser);
+router.delete('/remove/:id', ensureAuthenticated, controller.deleteUser);
 
 
 module.exports = router;

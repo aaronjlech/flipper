@@ -1,4 +1,4 @@
-const secret = 'penguins win';
+const TOKEN_SECRET = 'penguinsarebetterthanducks';
 
 
-module.exports = secret;
+module.exports = TOKEN_SECRET;

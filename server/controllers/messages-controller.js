@@ -1,5 +1,6 @@
 const Message = require('../models').Message;
 const User = require('../models').User;
+const { ensureAuthenticated } = require('../middlewares/jwt')
 const router = require('express').Router();
 
 
@@ -51,20 +52,6 @@ const controller = {
    }
 }
 
-
-router.param('userId', (req, res, next) => {
-   User.findById(req.params.userId, (err, user) => {
-      if(err) {
-         return next(err);
-      }
-      if(!user) {
-         err = new Error("User Not Found");
-      } else {
-         req.user = user;
-         return next();
-      }
-   })
-})
 router.param('messageId', (req, res, next) => {
    User.findById(req.params.messageId, (err, message) => {
       if(err) {
@@ -78,7 +65,7 @@ router.param('messageId', (req, res, next) => {
       }
    })
 })
-
+router.use(ensureAuthenticated)
 router.get('/:userId', controller.findMessagesByUser);
 // router.get('/:userId/messages/:messageId', controller.editMessage);
 router.get('/', controller.findAllMessages);

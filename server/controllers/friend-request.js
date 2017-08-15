@@ -1,7 +1,6 @@
 const User = require('../models').User;
+const { ensureAuthenticated } = require('../middlewares/jwt')
 const router = require('express').Router();
-
-
 
 const controller = {
    sendRequest: (req, res) => {
@@ -52,19 +51,7 @@ const controller = {
       })
    }
 }
-router.param('userId', (req, res, next) => {
-   User.findById(req.params.userId, (err, user) => {
-      if(err) {
-         return next(err);
-      }
-      if(!user) {
-         err = new Error("User Not Found");
-      } else {
-         req.user = user;
-         return next();
-      }
-   })
-})
+
 router.param('friendId', (req, res, next) => {
    User.findById(req.params.friendId, (err, friend) => {
       if(err) {
@@ -79,9 +66,9 @@ router.param('friendId', (req, res, next) => {
    })
 })
 
-
-router.put('/send/:userId/friend/:friendId', controller.sendRequest);
-router.put('/accept/:userId/friend/:friendId', controller.acceptRequest);
-router.put('/decline/:userId/request/:requestId/', controller.declineRequest);
+router.use(ensureAuthenticated)
+router.put('/send/:friendId', controller.sendRequest);
+router.put('/accept/friend/:friendId', controller.acceptRequest);
+router.put('/decline/request/:requestId/', controller.declineRequest);
 
 module.exports = router;

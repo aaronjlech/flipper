@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
    avatar_img: String,
    gender: {type: String, required: true},
    display_name: {type: String, required: true},
-   password: {type: String, required: true},
+   password: {type: String, required: true, select: false},
    direct_messages: [DmSchema],
    friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
    messages: [{type: mongoose.Schema.Types.ObjectId, ref: "Message"}],
