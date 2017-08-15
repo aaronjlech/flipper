@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../../components/NavBar';
 import MobileNav from '../../components/MobileNav';
 import Post from '../../components/Post';
+import UsersList from '../UsersList';
 import './HomeView.css';
 
 
@@ -16,7 +17,7 @@ export default class HomeView extends Component {
          <div className="home">
             <NavBar/>
 
-            <div className="post_container">
+            {/* <div className="post_container">
                <Post username='Bill' likes={0} key='0'/>
                <Post username='Bill' likes={0} key='50'/>
                <Post username='Bill' likes={0} key='540'/>
@@ -24,7 +25,9 @@ export default class HomeView extends Component {
                <Post username='Bill' likes={0} key='5asdfas0'/>
                <Post username='Bill' likes={0} key='5aaa0'/>
 
-            </div>
+            </div> */}
+            <UsersList/>
+
             <MobileNav/>
 
          </div>
