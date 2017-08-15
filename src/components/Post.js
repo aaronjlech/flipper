@@ -8,25 +8,25 @@ import FlatButton from 'material-ui/FlatButton';
 
 const Post = (props) => {
    return (
-      <Paper className="post">
-         <div className="post__image">
+      <Paper className="post columns small-12 large-6 row">
+         <div className="post__image columns small-3 row align-middle align-center">
             <Avatar src="https://randomuser.me/api/portraits/lego/4.jpg" size={90}/>
          </div>
-         <div className="post_text">
+         <div className="post_text columns">
             <h4 className='post__username'>@{props.username}</h4>
             <p className="post__time thin__italics">July 10, 2017</p>
             <p className="post__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <div className="post__social">
-               <div className="post__likes">
+            <div className="post__social row align-middle align-center">
+               <div className="post__likes columns small-6">
                   <Checkbox
-                    className='thin__italics'
+                    className={`thin__italics`}
                     checkedIcon={<ActionFavorite />}
                     uncheckedIcon={<ActionFavoriteBorder />}
                     iconStyle={{margin: '0'}}
                     label={`${props.likes} Likes`}
                   />
                </div>
-               <div className="post__comment">
+               <div className="post__comment columns">
                   <FlatButton
                      primary={true}
                      label='0 comments'

@@ -10,13 +10,7 @@
 .home{
    padding-top: 64px;
 }
-.post__image {
-   flex: 1;
-   margin-right: .7rem;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-}
+
 .message__user-info {
    display: flex;
 
@@ -28,7 +22,6 @@
    overflow: scroll;
 }
 .post__text {
-   flex: 2;
    font-size: .8rem;
 }
 .post__username {
@@ -41,15 +34,4 @@
 }
 .post__social {
    font-size: 13px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-}
-.post__social .post__likes {
-   flex: 1;
-}
-
-
-.user-card {
-   position: relative;
 }

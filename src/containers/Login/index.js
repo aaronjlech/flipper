@@ -32,7 +32,6 @@ export default class Login extends Component {
       const {username, password } = this.state;
       evt.preventDefault();
       loginUser({username, password}, history)
-      history.push('/home');
    }
 
    render(){

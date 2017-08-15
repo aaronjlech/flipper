@@ -16,12 +16,7 @@ const muiTheme = getMuiTheme({
       primary1Color: indigoA700,
       accent1Color: cyan300,
 
-   },
-
-   tab: {
-      backgroundColor: '#000'
    }
-
 
 
 });
