@@ -1,11 +1,14 @@
 import axios from 'axios'
 
 // ***** [[[[ USERS API ]]]] *****
-
 //[[* GET ALL USERS *]]
 // /api/users
-export function getAllUsers() {
-   return axios.get('/api/users')
+export function getAllUsers(token) {
+   return axios.get('/api/users', {
+      headers: {
+         authorization: `Bearer ${token}`
+      }
+   })
 }
 //[[* CREATE USER *]]
 // /api/users
@@ -23,18 +26,31 @@ export function loginUser(data) {
 }
 // [[* GET ONE USER *]]
 // /api/users/:id
-export function getUserById(userId) {
-   return axios.get(`/api/users/${userId}`)
+export function getUserById(userId, token) {
+   return axios.get(`/api/users/${userId}`, {
+      headers: {
+         authorization: `Bearer ${token}`
+      }
+   })
 }
 // [[* REMOVE SINGLE USER *]]
 // /api/users/remove/:id
-export function removeUser(userId) {
-   return axios.delete(`/api/users/${userId}`)
+export function removeUser(userId, token) {
+   return axios.delete(`/api/users/${userId}`, {
+      headers: {
+         authorization: `Bearer ${token}`
+      }
+   })
 }
 //[[ * EDIT SINGLE USER * ]]
 // api/users/:id
-export function editUser(userId, data){
-   return axios.put(`api/users/${userId}`, {
+export function editUser(userId, data, token){
+   return axios.put(`api/users/${userId}`,{
+      headers: {
+         authorization: `Bearer ${token}`
+      }
+      },
+      {
          user: data
       })
 }

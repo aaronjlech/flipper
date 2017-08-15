@@ -70,7 +70,7 @@ router.get('/:userId', controller.findMessagesByUser);
 // router.get('/:userId/messages/:messageId', controller.editMessage);
 router.get('/', controller.findAllMessages);
 // router.get('/:messageId', controller.findOneMessage);
-router.post('/create/:userId', controller.createMessage);
+router.post('/create', controller.createMessage);
 router.put('/comments/create/:messageId', controller.createComment)
 router.delete('/remove/:id', controller.deleteMessage);
 

@@ -33,20 +33,6 @@ const controller = {
 
 }
 
-router.param('userId', (req, res, next) => {
-   User.findById(req.params.userId, (err, user) => {
-      if(err) {
-         return next(err);
-      }
-      if(!user) {
-         err = new Error("User Not Found");
-      } else {
-         req.user = user;
-         return next();
-      }
-   })
-})
-
 router.param('messageId', (req, res, next) => {
    Message.findById(req.params.messageId, (err, message) => {
       if(err) {
@@ -61,7 +47,7 @@ router.param('messageId', (req, res, next) => {
    })
 })
 router.use(ensureAuthenticated)
-router.put('/user/:userId/message/:messageId', controller.handleLike);
+router.put('/message/:messageId', controller.handleLike);
 
 
 module.exports = router;

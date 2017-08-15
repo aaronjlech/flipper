@@ -7,23 +7,38 @@ import axios from 'axios';
 
 // /api/friends/send/:userId/friend/:friendId
 
-export function sendFriendRequest(userId, friendId) {
-   return axios.put(`api/friends/send/${userId}/friend/${friendId}`)
+export function sendFriendRequest(friendId, token) {
+   return axios.put(`api/friends/send/${friendId}`, {
+      headers: {
+         authorization: `Bearer ${token}`
+
+      }
+   })
 }
 // [[ * decline request * ]]
 //this will remove the request from the recepiant but not the sender
 
 // /api/friends/decline/:userId/request/:requestId
 
-export function declineFriendRequest(userId, requestId) {
-   return axios.put(`api/friends/decline/${userId}/request/${requestId}`)
+export function declineFriendRequest(requestId, token) {
+   return axios.put(`api/friends/decline/${userId}/request/${requestId}`, {
+      headers: {
+         authorization: `Bearer ${token}`
+
+      }
+   })
 }
 // [[ * accept request * ]]
 
 // /api/friends/accept/:userId/friend/:friendId
 
 export function acceptFriendRequest(userId, friendId){
-   return axios.put(`api/friends/accept/${userId}/friend/${friendId}`)
+   return axios.put(`api/friends/accept/${userId}/friend/${friendId}`, {
+      headers: {
+         authorization: `Bearer ${token}`
+
+      }
+   })
 }
 
 

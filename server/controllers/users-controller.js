@@ -127,11 +127,11 @@ const controller = {
    }
 }
 
-
 router.get('/', ensureAuthenticated, controller.findAllUsers);
 router.get('/:id', ensureAuthenticated, controller.findOneUser);
 router.put('/:id', ensureAuthenticated, controller.editUser);
 router.post('/', controller.createUser, controller.loginUser);
+router.post('/logout', ensureAuthenticated, controller.logoutUser)
 router.post('/login', controller.loginUser);
 router.delete('/remove/:id', ensureAuthenticated, controller.deleteUser);
 
