@@ -1,16 +1,22 @@
 import { users } from '../../services'
 import history from '../../history';
-
+import { getToken } from '../../services/auth';
 const requestUser = () => {
   return {
     type: 'REQUEST_USER'
   }
 }
-const receiveUser = (user) => {
+const receiveUser = (token) => {
+   console.log('username', token)
   return {
     type: 'RECEIVE_USER',
-    user: user
+    token: token
   }
+}
+const logoutUser = () => {
+   return {
+      type: 'LOGOUT_USER'
+   }
 }
 
 const signupFailure = (error) => {
@@ -32,7 +38,7 @@ const loginUser = (user) => {
       return users.loginUser(user)
          .then(res => {
             history.push('/home')
-            return dispatch(receiveUser(res.data))
+            return dispatch(receiveUser(res.data.token))
          })
          .catch(err => dispatch(loginFailure(err)))
    }
@@ -48,17 +54,18 @@ const signupUser = (userData) => {
 }
 
 const shouldFetchUser = (state) => {
-  if(!state.User.user) {
+  if(!state.User.user.token) {
+     console.log('what')
     return true
   }
   if(state.User.isFetching) {
     return false
   }
 }
-const fetchUser = (userId) => {
+const fetchUser = () => {
+   console.log('dispatching this one')
    return (dispatch) => {
-      dispatch(requestUser);
-      return users.getUserById(userId)
+      return dispatch(receiveUser(getToken()))
    }
 }
 
@@ -117,6 +124,7 @@ export default {
    updateUser,
    loginFailure,
    loginUser,
+   logoutUser,
    signupUser,
    signupFailure,
    fetchUserIfNeeded,

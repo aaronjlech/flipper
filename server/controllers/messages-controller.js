@@ -6,10 +6,12 @@ const router = require('express').Router();
 
 const controller = {
    createMessage: (req, res) => {
+      console.log('wahthttt')
       let messageData = {
          body: req.body.message
       };
       messageData._creator = req.user._id;
+      console.log(messageData)
       let message = new Message(messageData);
       message.save(function (err, newMessage) {
          if (err) {
@@ -32,7 +34,7 @@ const controller = {
    },
    findAllMessages: (req, res) => {
      Message.find()
-        .populate('likes _creator')
+        .populate('_creator')
         .exec((err, messages) => {
            console.log(messages);
          //   messages.likes.populate('_creator')
@@ -55,7 +57,7 @@ const controller = {
 }
 
 router.param('messageId', (req, res, next) => {
-   User.findById(req.params.messageId, (err, message) => {
+   Message.findById(req.params.messageId, (err, message) => {
       if(err) {
          return next(err);
       }

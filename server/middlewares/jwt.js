@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const TOKEN_SECRET = require('./secrets')
 const moment = require('moment')
-
+const User = require('../models').User
 function createToken (user) {
   const payload = {
     sub: user._id,
@@ -26,8 +26,11 @@ function ensureAuthenticated (req, res, next) {
   if (payload.exp <= moment().unix()) {
     return res.status(401).send({ message: 'Token has expired' })
   }
-  req.user = payload.user
-  next()
+  console.log(payload.user._id)
+  User.findById(payload.user._id, (err, currentUser) => {
+     req.user = currentUser
+     return next()
+ })
 }
 
 module.exports = { createToken, ensureAuthenticated }
