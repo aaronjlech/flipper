@@ -9,36 +9,18 @@ const styles = {
    width: '100%',
    zIndex: '1000'
 }
-export default class TabsExampleIcon extends Component{
-   constructor(props){
-      super(props)
-      this.state = {
-         open: false
-      }
-   }
-
-   handleOpen = () => {
-     this.setState({open: true});
-   };
-
-   handleClose = () => {
-     this.setState({open: false});
-   };
-
-   render(){
+const MobileNav = (props) =>{
       return (
          <div className="mobile-nav">
-            <PostModal {...this.props} showModal={this.state.open} handleClose={this.handleClose} handleOpen={this.handleOpen}/>
-
-            <Tabs style={styles}>
-               <Tab icon={<FontIcon className="material-icons" >face</FontIcon>} />
-               <Tab icon={<FontIcon className="material-icons">home</FontIcon>} />
-               <Tab onActive={this.handleOpen} icon={<AddIcon/>} />
+            <PostModal {...props} />
+            <Tabs value={props.value} onChange={props.handleSlide} style={styles}>
+               <Tab value={0} icon={<FontIcon className="material-icons" >face</FontIcon>} />
+               <Tab value={1} icon={<FontIcon className="material-icons">home</FontIcon>} />
+               <Tab value={2} onActive={props.handleOpen} icon={<AddIcon/>} />
 
             </Tabs>
          </div>
 
        )
-
-   }
 }
+export default MobileNav

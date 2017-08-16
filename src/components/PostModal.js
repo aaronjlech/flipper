@@ -61,7 +61,7 @@ export default class PostModal extends React.Component {
           actions={actions}
           modal={true}
           contentStyle={customContentStyle}
-          open={this.props.showModal}
+          open={this.props.open}
         >
          <div className="message__user-info">
              <div className="user-info__avatar">
