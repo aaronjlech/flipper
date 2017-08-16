@@ -9,7 +9,7 @@ import { getToken } from './auth';
 export function getSingleMessage(userId) {
    return axios.get(`/api/messages/${userId}`, {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    });
 }
@@ -20,7 +20,7 @@ export function getSingleMessage(userId) {
 export function getAllMessages() {
    return axios.get(`/api/messages`, {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    });
 }
@@ -37,7 +37,7 @@ export function createMessage(data) {
       },
       {
          headers: {
-            'authorization': `Bearer ${getToken()}`
+            'Authorization': `Bearer ${getToken()}`
          }
       }
    );
@@ -48,7 +48,7 @@ export function createMessage(data) {
 export function removeMessage(messageId) {
    return axios.delete(`/api/messages/remove/${messageId}`, {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    });
 }
@@ -62,7 +62,7 @@ export function createComment(messageId, commentData) {
       },
       {
          headers: {
-            authorization: `Bearer ${getToken()}`
+            Authorization: `Bearer ${getToken()}`
          }
       }
    );

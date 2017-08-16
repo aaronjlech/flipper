@@ -8,7 +8,7 @@ import { getToken } from './auth';
 export default function handleLike(messageId, token) {
    return axios.put(`/api/likes/message/${messageId}`, {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    })
 }

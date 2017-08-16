@@ -48,15 +48,16 @@ const signupUser = (userData) => {
 }
 
 const shouldFetchUser = (state) => {
-  if(!state.user) {
+  if(!state.User.user) {
     return true
   }
-  if(state.isFetching) {
+  if(state.User.isFetching) {
     return false
   }
 }
 const fetchUser = (userId) => {
    return (dispatch) => {
+      dispatch(requestUser);
       return users.getUserById(userId)
    }
 }
@@ -75,6 +76,39 @@ const updateUser = (updatedUser) => {
   }
 }
 
+const requestAllUsers = () => {
+   return {
+      type: 'REQUEST_ALL_USERS',
+
+   }
+}
+const fetchAllUsers = () => {
+   return (dispatch) => {
+      dispatch(requestAllUsers)
+      return users.getAllUsers()
+               .then(res => dispatch(receiveAllUsers(res.data)))
+   }
+}
+const shouldFetchAllUsers = (state) => {
+   if(state.AllUsers.allUsers) {
+      return true
+   } else {
+      return false
+   }
+}
+const fetchAllUsersIfNeeded = () => {
+   return (dispatch, getState) => {
+      if(shouldFetchAllUsers(getState())){
+         dispatch(fetchAllusers())
+      }
+   }
+}
+const receiveAllUsers = (data) => {
+   return {
+      type: 'RECEIVE_ALL_USERS',
+      allUsers: data
+   }
+}
 
 
 export default {
@@ -87,5 +121,9 @@ export default {
    signupFailure,
    fetchUserIfNeeded,
    shouldFetchUser,
+   fetchAllUsers,
+   receiveAllUsers,
+   requestAllUsers,
+   fetchAllUsersIfNeeded
 
 }

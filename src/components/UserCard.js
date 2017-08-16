@@ -9,16 +9,15 @@ import MessageIcon from 'material-ui/svg-icons/communication/message'
 const UserCard = (props) => {
 
    return (
-      <Paper className="user-card">
-         <div className="user-card__avatar">
-            <Avatar src="https://randomuser.me/api/portraits/lego/4.jpg" size={90}/>
+      <Paper className="user-card small-12 columns row">
+         <div className="user-card__avatar small-3 row align-middle align-center columns">
+            <Avatar src={props.user.avatar_img} size={90}/>
          </div>
-         <div className="user-card__content">
-            <h4>@Bill</h4>
-            <h4>email@mail.com</h4>
-
+         <div className="user-card__content small-8 columns">
+            <h4>@{props.user.display_name}</h4>
+            <p>{props.user.username}</p>
          </div>
-         <div className="user-card__buttons">
+         <div className="user-card__buttons small-12 align-middle align-center row">
             <FlatButton
                style={{textAlign: 'center'}}
                primary={true}
@@ -28,7 +27,7 @@ const UserCard = (props) => {
             />
             <FlatButton
                secondary={true}
-               label='See Posts(10)'
+               label={`See Posts(${props.user.messages.length})`}
                labelStyle={{fontWeight: '300'}}
                icon={<MessageIcon/>}
             />

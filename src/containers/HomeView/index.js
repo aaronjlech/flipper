@@ -10,23 +10,18 @@ import './HomeView.css';
 
 export default class HomeView extends Component {
 
-
+   componentDidMount = () => {
+      this.props.fetchUserIfNeeded()
+      this.props.fetchAllUsers()
+      this.props.fetchMessagesIfNeeded()
+   }
 
    render(){
       return (
          <div className="home">
             <NavBar/>
 
-            <div className="post_container row">
-               <Post username='Bill' likes={0} key='0'/>
-               <Post username='Bill' likes={0} key='50'/>
-               <Post username='Bill' likes={0} key='540'/>
-               <Post username='Bill' likes={0} key='5ff0'/>
-               <Post username='Bill' likes={0} key='5asdfas0'/>
-               <Post username='Bill' likes={0} key='5aaa0'/>
-
-            </div>
-            {/* <UsersList/> */}
+            <UsersList {...this.props}/>
 
             <MobileNav {...this.props}/>
 

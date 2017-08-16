@@ -7,7 +7,7 @@ import { getToken } from './auth';
 export function getAllUsers() {
    return axios.get('/api/users', {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    })
 }
@@ -30,7 +30,7 @@ export function loginUser(data) {
 export function getUserById(userId) {
    return axios.get(`/api/users/${userId}`, {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    })
 }
@@ -39,7 +39,7 @@ export function getUserById(userId) {
 export function removeUser(userId) {
    return axios.delete(`/api/users/${userId}`, {
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
    })
 }
@@ -48,7 +48,7 @@ export function removeUser(userId) {
 export function editUser(userId, data){
    return axios.put(`api/users/${userId}`,{
       headers: {
-         authorization: `Bearer ${getToken()}`
+         Authorization: `Bearer ${getToken()}`
       }
       },
       {

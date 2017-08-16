@@ -18,7 +18,7 @@ function ensureAuthenticated (req, res, next) {
     return res
       .status(401)
       .send({
-        message: 'Please make sure your request has an Authorization header'
+        message: 'Please make sure your request has an authorization header'
       })
   }
   const token = req.headers.authorization.split(' ')[1]

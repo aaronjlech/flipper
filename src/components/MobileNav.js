@@ -9,8 +9,6 @@ const styles = {
    width: '100%',
    zIndex: '1000'
 }
-
-
 export default class TabsExampleIcon extends Component{
    constructor(props){
       super(props)

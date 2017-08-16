@@ -13,6 +13,7 @@
 }
 .home{
    padding-top: 64px;
+   padding-bottom: 48px;
 }
 
 .message__user-info {
@@ -32,7 +33,18 @@
    color: #304FFE;
    margin: 0 0 .6em;
 }
-
+.user-card {
+   padding: 13px;
+}
+.user-card__avatar {
+   margin: 0;
+}
+.user-card__content {
+   margin: 0;
+}
+.user-card__content h4 {
+   color: #304FFE;
+}
 .mobile-nav {
    background: #FFF;
 }
