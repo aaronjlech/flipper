@@ -17,7 +17,7 @@ const controller = {
                let user = new User(userData);
                user.save(function (err, newUser) {
                   if (err) {
-                     res.send(err);
+                     return res.send(err);
                   } else {
                      console.log(req.body.user)
                      req.body.user = {username: req.body.user.username, password}
@@ -57,10 +57,13 @@ const controller = {
       // console.log(req.body.user)
       const { username, password } = req.body.user;
       User.findOne({ username }, '+password', (err, user) => {
-         // console.log(user);
+         console.log(user);
+         if(!user) {
+            return res.status(401).send({message:'wrong username or password'})
+         }
          if(err){
 
-            res.status(400).send('wrong password or username');
+            return res.status(500).send('');
          } else {
             console.log('-------')
             // console.log(password, user.password);
@@ -92,9 +95,9 @@ const controller = {
                         _id,
                         gender
                      }
-                     res.send({token: createToken(userInfo)})
+                     return res.send({token: createToken(userInfo)})
                   }else {
-                     res.status(400).send('wrong password or username');
+                     return res.status(400).send('wrong password or username');
                   }
                })
          }

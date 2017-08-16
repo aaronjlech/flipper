@@ -28,6 +28,7 @@ const Post = (props) => {
                </div>
                <div className="post__comment columns">
                   <FlatButton
+                     style={{zIndex: '0'}}
                      primary={true}
                      label='0 comments'
                      labelStyle={{fontWeight: '400', fontSize: '13px'}}

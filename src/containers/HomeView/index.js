@@ -28,7 +28,7 @@ export default class HomeView extends Component {
             </div>
             {/* <UsersList/> */}
 
-            <MobileNav/>
+            <MobileNav {...this.props}/>
 
          </div>
       )

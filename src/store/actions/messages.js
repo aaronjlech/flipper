@@ -33,7 +33,7 @@ const couldNotReceiveMessages = (error) => {
 const fetchMessages = () => (dispatch) => {
    dispatch(requestMessages)
    return messages.getAllMessages()
-                  .then(data => dispatch(receiveMessages(data)))
+                  .then(res => dispatch(receiveMessages(res.data)))
                   .catch(err => dispatch(couldNotReceiveMessages(err)))
 }
 

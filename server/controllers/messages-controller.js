@@ -6,7 +6,9 @@ const router = require('express').Router();
 
 const controller = {
    createMessage: (req, res) => {
-      let messageData = req.body.message;
+      let messageData = {
+         body: req.body.message
+      };
       messageData._creator = req.user._id;
       let message = new Message(messageData);
       message.save(function (err, newMessage) {

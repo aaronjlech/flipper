@@ -29,6 +29,12 @@ export default class PostModal extends React.Component {
       this.props.handleClose()
 
    }
+   handleSubmit = (evt) => {
+      evt.preventDefault();
+      this.handleClose()
+      this.props.createMessage(this.state.message)
+      this.setState({message: ''})
+   }
 
   render() {
       const { message } = this.state;
@@ -45,7 +51,7 @@ export default class PostModal extends React.Component {
         label="Submit"
         primary={true}
         disabled={!isFilled}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleSubmit}
       />,
     ];
 

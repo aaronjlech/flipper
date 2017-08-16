@@ -5,7 +5,11 @@
 .nav-bar{
    position: fixed;
    width: 100%;
+   z-index: 1000;
    top: 0;
+}
+.mobile-nav {
+   z-index: 1000;
 }
 .home{
    padding-top: 64px;

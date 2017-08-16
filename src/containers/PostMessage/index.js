@@ -9,6 +9,7 @@ export default class PostMessage extends Component {
       super(props)
    }
 
+   
    render(){
       return (
          <Card className="message_container">

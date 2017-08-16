@@ -31,9 +31,7 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
 app.use(bodyParser.json());
-app.use(session({secret: 'theresomethingonthewing'}))
-app.use(passport.initialize())
-app.use(passport.session())
+
 
 
 app.use('/api/users', controller.usersController);
