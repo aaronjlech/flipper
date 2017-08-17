@@ -12,19 +12,26 @@
    z-index: 1000;
 }
 .home{
-   padding-top: 64px;
-   padding-bottom: 48px;
+   height: 100vh;
+   width: 100%;
+   margin-top: 64px;
+   margin-bottom: 48px;
 }
 
+.messages-list {
+   height: 100vh;
+   width: 100%;
+}
+.users_container {
+   height: 100vh;
+   width: 100%;
+}
 .message__user-info {
    display: flex;
 
 }
 .content__word-length {
    margin: 0;
-}
-.post_container {
-   overflow: scroll;
 }
 .post__text {
    font-size: .8rem;

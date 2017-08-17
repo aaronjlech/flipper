@@ -33,29 +33,33 @@ export default class HomeView extends Component {
      this.setState({open: false});
    };
    handleSlide = (value) => {
+      console.log(window.scrollY)
+      document.body.scrollTop = 0;
       this.setState({value})
    }
    render(){
       return (
-         <div className="home">
-            <NavBar/>
+            <div className="home">
 
-            <SwipeableViews
-        index={this.state.value}
-        onChangeIndex={this.handleSlide}
-     >
-        <UsersList {...this.props}/>
-        <MessagesList {...this.props} />
-     </SwipeableViews>
-            <MobileNav
-               {...this.props}
-               {...this.state}
-               handleSlide={this.handleSlide}
-               handleOpen={this.handleOpen}
-               handleClose={this.handleClose}
-            />
+               <NavBar/>
 
-         </div>
+               <SwipeableViews
+            index={this.state.value}
+            onChangeIndex={this.handleSlide}
+            >
+            <UsersList {...this.props}/>
+            <MessagesList {...this.props} />
+            </SwipeableViews>
+               <MobileNav
+                  {...this.props}
+                  {...this.state}
+                  handleSlide={this.handleSlide}
+                  handleOpen={this.handleOpen}
+                  handleClose={this.handleClose}
+               />
+
+            </div>
+
       )
    }
 }

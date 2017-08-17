@@ -37,7 +37,7 @@ const User = (
          return Object.assign({}, state, { isFetching: true });
       case "RECEIVE_USER":
          console.log(action.token)
-         setToken(action.token)
+            setToken(action.token)
          let userData = jwtDecode(action.token);
          return Object.assign({}, state, {
             isFetching: false,
