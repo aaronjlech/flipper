@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
-import { getToken, setToken, removeToken } from '../../services/auth'
-import history from '../../history';
+import { getToken, setToken, removeToken } from "../../services/auth";
+import history from "../../history";
 
 const AllUsers = (
    state = {
@@ -36,8 +36,8 @@ const User = (
       case "REQUEST_USER":
          return Object.assign({}, state, { isFetching: true });
       case "RECEIVE_USER":
-         console.log(action.token)
-            setToken(action.token)
+         console.log(action.token);
+         setToken(action.token);
          let userData = jwtDecode(action.token);
          return Object.assign({}, state, {
             isFetching: false,
@@ -45,14 +45,14 @@ const User = (
             token: action.token,
             user: userData.user
          });
-      case 'LOGOUT_USER':
-         removeToken()
-         history.push('/')
+      case "LOGOUT_USER":
+         removeToken();
+         history.push("/");
          return Object.assign({}, state, {
             isLoggedIn: false,
-            token: '',
+            token: "",
             user: {}
-         })
+         });
       case "LOGIN_FAILURE":
          return Object.assign({}, state, {
             error: action.error

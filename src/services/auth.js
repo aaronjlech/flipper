@@ -1,17 +1,17 @@
 export function getToken() {
-   let token = localStorage.getItem('token');
-   if(token) {
-      return token
+   let token = localStorage.getItem("token");
+   if (token) {
+      return token;
    } else {
-      return false
+      return false;
    }
 }
 
 export function setToken(token) {
-   if(!getToken()){
-      localStorage.setItem('token', token)
+   if (!getToken()) {
+      localStorage.setItem("token", token);
    }
 }
 export function removeToken() {
-   localStorage.removeItem('token')
+   localStorage.removeItem("token");
 }

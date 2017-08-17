@@ -1,65 +1,58 @@
-import React, { Component } from 'react';
-import NavBar from '../../components/NavBar';
-import MobileNav from '../../components/MobileNav';
-import Post from '../../components/Post';
-import UsersList from '../UsersList';
-import SwipeableViews from 'react-swipeable-views';
+import React, { Component } from "react";
+import NavBar from "../../components/NavBar";
+import MobileNav from "../../components/MobileNav";
+import Post from "../../components/Post";
+import UsersList from "../UsersList";
+import SwipeableViews from "react-swipeable-views";
 
-import MessagesList from '../MessagesList';
-import './HomeView.css';
-
-
-
+import MessagesList from "../MessagesList";
+import "./HomeView.css";
 
 export default class HomeView extends Component {
-
    constructor(props) {
-      super(props)
+      super(props);
       this.state = {
          open: false,
          value: 1
-      }
+      };
    }
    componentDidMount = () => {
-      this.props.fetchUserIfNeeded()
-      this.props.fetchAllUsers()
-      this.props.fetchMessagesIfNeeded()
-   }
+      this.props.fetchUserIfNeeded();
+      this.props.fetchAllUsers();
+      this.props.fetchMessagesIfNeeded();
+   };
    handleOpen = () => {
-     this.setState({open: true});
+      this.setState({ open: true });
    };
 
    handleClose = () => {
-     this.setState({open: false});
+      this.setState({ open: false });
    };
-   handleSlide = (value) => {
-      console.log(window.scrollY)
+   handleSlide = value => {
+      console.log(window.scrollY);
       document.body.scrollTop = 0;
-      this.setState({value})
-   }
-   render(){
+      this.setState({ value });
+   };
+   render() {
       return (
-            <div className="home">
+         <div className="home">
+            <NavBar />
 
-               <NavBar/>
-
-               <SwipeableViews
-            index={this.state.value}
-            onChangeIndex={this.handleSlide}
+            <SwipeableViews
+               index={this.state.value}
+               onChangeIndex={this.handleSlide}
             >
-            <UsersList {...this.props}/>
-            <MessagesList {...this.props} />
+               <UsersList {...this.props} />
+               <MessagesList {...this.props} />
             </SwipeableViews>
-               <MobileNav
-                  {...this.props}
-                  {...this.state}
-                  handleSlide={this.handleSlide}
-                  handleOpen={this.handleOpen}
-                  handleClose={this.handleClose}
-               />
-
-            </div>
-
-      )
+            <MobileNav
+               {...this.props}
+               {...this.state}
+               handleSlide={this.handleSlide}
+               handleOpen={this.handleOpen}
+               handleClose={this.handleClose}
+            />
+         </div>
+      );
    }
 }

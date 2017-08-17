@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { getToken } from './auth';
+import axios from "axios";
+import { getToken } from "./auth";
 // **** [[[[ FRIENDS API ]]]] ****
 // all friends routes are PUT routes
 // [[* SEND REQUEST *]]
@@ -11,9 +11,8 @@ export function sendFriendRequest(friendId) {
    return axios.put(`api/friends/send/${friendId}`, {
       headers: {
          Authorization: `Bearer ${getToken()}`
-
       }
-   })
+   });
 }
 // [[ * decline request * ]]
 //this will remove the request from the recepiant but not the sender
@@ -24,22 +23,19 @@ export function declineFriendRequest(requestId) {
    return axios.put(`api/friends/decline/${userId}/request/${requestId}`, {
       headers: {
          Authorization: `Bearer ${getToken()}`
-
       }
-   })
+   });
 }
 // [[ * accept request * ]]
 
 // /api/friends/accept/:userId/friend/:friendId
 
-export function acceptFriendRequest(friendId){
+export function acceptFriendRequest(friendId) {
    return axios.put(`api/friends/accept/${userId}/friend/${friendId}`, {
       headers: {
          Authorization: `Bearer ${getToken()}`
-
       }
-   })
+   });
 }
-
 
 // **** [[[ * END FRIENDS *]]] ****

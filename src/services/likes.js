@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { getToken } from './auth';
+import axios from "axios";
+import { getToken } from "./auth";
 // **** [[[* MESSAGES API *]]] ****
 
 //POST LIKE
@@ -10,5 +10,5 @@ export default function handleLike(messageId, token) {
       headers: {
          Authorization: `Bearer ${getToken()}`
       }
-   })
+   });
 }
