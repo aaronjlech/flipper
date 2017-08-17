@@ -5,8 +5,8 @@ import { getToken } from "./auth";
 //POST LIKE
 
 // /api/likes/user/:userId/message/:messageId
-export default function handleLike(messageId, token) {
-   return axios.put(`/api/likes/message/${messageId}`, {
+export default function submitLike(messageId) {
+   return axios.put(`/api/likes/message/${messageId}`,{}, {
       headers: {
          Authorization: `Bearer ${getToken()}`
       }

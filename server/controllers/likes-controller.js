@@ -7,11 +7,13 @@ const router = require('express').Router();
 const controller = {
    handleLike: (req, res) => {
       const { message, user } = req
+      console.log(message.likes)
+
       let userIndex = user.likes.indexOf(message._id);
-      let messageIndex = messsage.likes.indexOf(user._id);
+      let messageIndex = message.likes.indexOf(user._id);
 
          if(userIndex > -1 && messageIndex > -1){
-            message.likes.push(messageIndex, 1)
+            message.likes.splice(messageIndex, 1)
             user.likes.splice(userIndex, 1)
             user.save();
             message.save((err, updatedMessage) => {

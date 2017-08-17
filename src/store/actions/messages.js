@@ -1,4 +1,4 @@
-import { messages, likes } from "../../services";
+import { messages, submitLike } from "../../services";
 
 const requestMessages = () => {
    return {
@@ -64,8 +64,7 @@ const createComment = (messageId, commentData) => {
 
 const handleLike = messageId => {
    return dispatch => {
-      likes
-         .handleLike(userId, messageId)
+      submitLike(messageId)
          .then(res => dispatch(fetchMessages()))
          .catch(res => dispatch(couldNotReceiveMessages(err)));
    };

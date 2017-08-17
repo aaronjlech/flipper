@@ -8,7 +8,7 @@ const webpackConfig = require('./webpack.config.js');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
+const morgan = require('morgan');
 const models = require('./server/models');
 const controller = require('./server/controllers');
 
@@ -18,7 +18,6 @@ mongoose.connect('mongodb://localhost:27017/flipper_db');
 
 const app = express();
 const compiler = webpack(webpackConfig);
-
 app.use(express.static(__dirname + '/public'));
 
 app.use(webpackDevMiddleware(compiler, {

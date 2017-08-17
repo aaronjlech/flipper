@@ -23,6 +23,7 @@ const controller = {
    },
    createComment: (req, res) => {
       let commentData = req.body.comment;
+      commentData._creator= req.user._id
       req.message.comments.push(commentData)
       req.message.save((err, updatedMessage) => {
          if(err) {
