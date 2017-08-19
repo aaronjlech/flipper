@@ -34,6 +34,7 @@ export default class HomeView extends Component {
       this.setState({ value });
    };
    render() {
+      const { value } = this.state
       return (
          <div className="home">
             <NavBar />
@@ -42,8 +43,8 @@ export default class HomeView extends Component {
                index={this.state.value}
                onChangeIndex={this.handleSlide}
             >
-               <UsersList {...this.props} />
-               <MessagesList {...this.props} />
+               <UsersList {...this.props} value={value}/>
+               <MessagesList {...this.props} value={value}/>
             </SwipeableViews>
             <MobileNav
                {...this.props}

@@ -7,10 +7,11 @@ export default class MessagesList extends Component {
    };
 
    render() {
-      const { _id } = this.props.User.user;
+      const { _id, } = this.props.User.user;
+      const { value } = this.props
       console.log(_id)
       return (
-         <div className="messages-list row">
+         <div className={!value ? `messages-list row overflow-hidden` : `messages-list row`}>
             {this.props.Messages.messages.map(message => {
                return (
                   <Post

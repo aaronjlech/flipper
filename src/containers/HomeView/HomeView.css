@@ -12,19 +12,20 @@
    z-index: 1000;
 }
 .home {
+   overflow: hidden;
    height: 100vh;
    width: 100%;
-   margin-top: 64px;
-   margin-bottom: 48px;
+   padding-top: 64px;
+   padding-bottom: 48px;
 }
 
 .messages-list {
-   height: 100vh;
+   height: calc(100vh - 112px);
    width: 100%;
    overflow-y: scroll;
 }
 .users_container {
-   height: 100vh;
+   height: calc(100vh - 112px);
    overflow-y: scroll;
    width: 100%;
 }
@@ -58,4 +59,10 @@
 }
 .post__social {
    font-size: 13px;
+}
+.overflow-hidden {
+   overflow-y: hidden;
+}
+.overflow-scroll {
+   overflow-y: scroll;
 }
