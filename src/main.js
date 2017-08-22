@@ -3,12 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { indigoA700, cyan300 } from 'material-ui/styles/colors';
-import * as services from './services';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import RaisedButton from 'material-ui/RaisedButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import store from './store';
-import Login from './containers/Login';
 import App from './containers/App';
 
 const muiTheme = getMuiTheme({
@@ -29,7 +26,6 @@ class Main extends Component {
            <MuiThemeProvider muiTheme={muiTheme}>
              <Provider store={store}>
                 <App/>
-
              </Provider>
            </MuiThemeProvider>
         )

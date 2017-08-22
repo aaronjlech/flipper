@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import store from "../../store";
 import actions from "../../store/actions";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -14,7 +13,7 @@ import "./App.css";
 class App extends Component {
    render() {
       const { User, AllUsers, Messages } = this.props;
-      console.log(this.props);
+      console.log(User);
       if (User.isFetching || Messages.isFetching || AllUsers.isFetching) {
          return <Loading />;
       } else {

@@ -56,6 +56,7 @@ const signupUser = userData => {
 };
 
 const shouldFetchUser = state => {
+   console.log(state)
    if (!state.User.user.token) {
       console.log("what");
       return true;
@@ -73,7 +74,10 @@ const fetchUser = () => {
 
 const fetchUserIfNeeded = () => {
    return (dispatch, getState) => {
+      console.log('herr');
       if (shouldFetchUser(getState())) {
+         dispatch(requestUser)
+
          return dispatch(fetchUser());
       }
    };

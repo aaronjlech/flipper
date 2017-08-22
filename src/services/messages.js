@@ -25,10 +25,8 @@ export function getAllMessages() {
    });
 }
 //POST MESSAGE
-console.log(getToken());
 // /api/messages/create/:userId
 export function createMessage(data) {
-   console.log(data);
    return axios.post(
       `/api/messages/create`,
 

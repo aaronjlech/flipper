@@ -5,23 +5,22 @@ import Checkbox from "material-ui/Checkbox";
 import Paper from "material-ui/Paper";
 import Avatar from "material-ui/Avatar";
 import FlatButton from "material-ui/FlatButton";
-import moment from 'moment';
+import moment from "moment";
 const Post = props => {
-   const { message, currentUser } = props
-   const { _creator } = message
+   const { message, currentUser } = props;
+   const { _creator } = message;
    return (
       <Paper className="post columns small-12 large-6 row">
          <div className="post__image columns small-3 row align-middle align-center">
-            <Avatar
-               src={_creator.avatar_img}
-               size={90}
-            />
+            <Avatar src={_creator.avatar_img} size={90} />
          </div>
          <div className="post_text columns">
             <h4 className="post__username">
                @{_creator.display_name}
             </h4>
-            <p className="post__time thin__italics">{moment(message.createdAt).from(Date.now())}</p>
+            <p className="post__time thin__italics">
+               {moment(message.createdAt).from(Date.now())}
+            </p>
             <p className="post__text">
                {message.body}
             </p>
@@ -35,7 +34,7 @@ const Post = props => {
                      uncheckedIcon={<ActionFavoriteBorder />}
                      iconStyle={{ margin: "0" }}
                      label={`${message.likes.length} Likes`}
-                     onCheck={(evt) => props._handleLike(evt, message._id)}
+                     onCheck={evt => props._handleLike(evt, message._id)}
                   />
                </div>
                <div className="post__comment columns">

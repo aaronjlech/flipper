@@ -2,6 +2,10 @@
    display: flex;
    padding: 1rem;
 }
+#messageForm{
+   outline: 0;
+   -webkit-appearance: none;
+}
 .nav-bar {
    position: fixed;
    width: 100%;

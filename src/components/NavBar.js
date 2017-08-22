@@ -1,17 +1,21 @@
 import React from "react";
 import AppBar from "material-ui/AppBar";
-
+import RequestsIcon from './RequestsIcon'
 /**
  * A simple example of `AppBar` with an icon on the right.
  * By default, the left icon is a navigation-menu.
  */
-const NavBar = () =>
-   <AppBar
-      style={{ position: "fixed", backgroundColor: "#000" }}
+const NavBar = (props) => {
+   const { user } = props.User
+   console.log(user);
+   return (
+      <AppBar
+      style={{ position: "fixed", backgroundColor: "#000", color: '#FFF' }}
       title="Flippr"
       className="nav-bar"
       titleStyle={{ textAlign: "center", fontFamily: "Grand Hotel, serif" }}
-      iconClassNameRight="muidocs-icon-navigation-expand-more"
-   />;
+      iconElementRight={<RequestsIcon user={user}/>}
+      iconStyleRight={{padding: 0}}
+   />)}
 
 export default NavBar;
