@@ -43,7 +43,6 @@ export default class SignUpModal extends Component {
       this.setState({open: false});
    };
    handleChange = (evt) => {
-      console.log(evt.target.name)
       const {username, display_name, password, repeatPassword, gender} = this.state;
          this.setState({[evt.target.name] : evt.target.value, disableSubmit: true})
 
@@ -61,7 +60,6 @@ export default class SignUpModal extends Component {
    }
 
 render() {
-   console.log(this.props)
    const { username, password, repeatPassword, display_name, gender } = this.state
 
  const actions = [
@@ -73,7 +71,7 @@ render() {
     <FlatButton
       label="Sign Up"
       primary={true}
-      disabled={(username && display_name && password && repeatPassword && gender) ? false : true}
+      disabled={!(username && display_name && password && repeatPassword && gender)}
       onTouchTap={this.handleSubmit}
     />,
  ];

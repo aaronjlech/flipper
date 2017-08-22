@@ -39,6 +39,7 @@ const User = (
          console.log(action.token);
          setToken(action.token);
          let userData = jwtDecode(action.token);
+         console.log(userData);
          return Object.assign({}, state, {
             isFetching: false,
             isLoggedIn: true,

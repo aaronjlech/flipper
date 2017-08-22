@@ -1,6 +1,7 @@
 const User = require('../models').User;
 const { ensureAuthenticated } = require('../middlewares/jwt')
 const router = require('express').Router();
+const { createToken } = require("../middlewares/jwt");
 
 const controller = {
    sendRequest: (req, res) => {
@@ -14,15 +15,13 @@ const controller = {
       })
       user.save((err, updatedUser) => {
          if (err) res.status(500).send(err);
-         res.send(updatedUser)
+         res.send({token: createToken(updatedUser)})
       });
    },
    acceptRequest: (req, res) => {
       const { friend, user } = req;
-      console.log(user.sent_requests)
       let sentIndex = user.friend_requests.indexOf(friend._id);
       let friendIndex = friend.sent_requests.indexOf(user._id);
-      console.log(sentIndex)
       if(sentIndex > -1) {
          user.friend_requests.splice(sentIndex, 1);
 

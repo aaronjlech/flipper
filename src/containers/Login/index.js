@@ -35,7 +35,6 @@ export default class Login extends Component {
    }
 
    render(){
-      console.log(this.props);
       const { username, password } = this.state;
       return(
          <div className="login container">

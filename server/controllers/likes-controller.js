@@ -7,7 +7,6 @@ const router = require('express').Router();
 const controller = {
    handleLike: (req, res) => {
       const { message, user } = req
-      console.log(message.likes)
 
       let userIndex = user.likes.indexOf(message._id);
       let messageIndex = message.likes.indexOf(user._id);

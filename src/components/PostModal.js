@@ -39,7 +39,6 @@ export default class PostModal extends React.Component {
       const wordLength = 170 - message.length;
       const isFilled =
          wordLength <= 170 && message.length > 0 && wordLength > 0;
-      console.log(isFilled);
       const actions = [
          <FlatButton
             label="Cancel"

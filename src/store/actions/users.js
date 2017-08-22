@@ -1,4 +1,4 @@
-import { users } from "../../services";
+import { users, friends } from "../../services";
 import history from "../../history";
 import { getToken } from "../../services/auth";
 const requestUser = () => {
@@ -118,7 +118,16 @@ const receiveAllUsers = data => {
       allUsers: data
    };
 };
-
+const handleFriendRequest = (friendId) => {
+   return (dispatch) => {
+      return friends.sendFriendRequest(friendId)
+         .then(res =>{
+            console.log(res.data)
+            return dispatch(receiveUser(res.data.token))
+         })
+         .catch(err => dispatch(signupFailure(err)));
+   }
+}
 export default {
    requestUser,
    receiveUser,
@@ -133,5 +142,6 @@ export default {
    fetchAllUsers,
    receiveAllUsers,
    requestAllUsers,
-   fetchAllUsersIfNeeded
+   fetchAllUsersIfNeeded,
+   handleFriendRequest
 };

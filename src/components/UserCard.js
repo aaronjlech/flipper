@@ -5,7 +5,17 @@ import FlatButton from "material-ui/FlatButton";
 import ActionAndroid from "material-ui/svg-icons/action/android";
 import MessageIcon from "material-ui/svg-icons/communication/message";
 
+function friendLabel(friendId, currentUser){
+   if(currentUser.sent_requests.includes(friendId)) {
+      return 'Request Sent'
+   } else {
+      return 'Add Friend'
+   }
+}
+
 const UserCard = props => {
+   let label = friendLabel(props.user._id, props.currentUser)
+
    return (
       <Paper className="user-card small-12 columns row">
          <div className="user-card__avatar small-3 row align-middle align-center columns">
@@ -23,9 +33,11 @@ const UserCard = props => {
             <FlatButton
                style={{ textAlign: "center" }}
                primary={true}
-               label="Add friend"
+               disabled={label === "Request Sent"}
+               label={label}
                labelStyle={{ fontWeight: "300" }}
                icon={<ActionAndroid />}
+               onTouchTap={() => props.handleFriendRequest(props.user._id)}
             />
             <FlatButton
                secondary={true}

@@ -8,7 +8,7 @@ import { getToken } from "./auth";
 // /api/friends/send/:userId/friend/:friendId
 
 export function sendFriendRequest(friendId) {
-   return axios.put(`api/friends/send/${friendId}`, {
+   return axios.put(`api/friends/send/${friendId}`,{}, {
       headers: {
          Authorization: `Bearer ${getToken()}`
       }
@@ -20,7 +20,7 @@ export function sendFriendRequest(friendId) {
 // /api/friends/decline/:userId/request/:requestId
 
 export function declineFriendRequest(requestId) {
-   return axios.put(`api/friends/decline/${userId}/request/${requestId}`, {
+   return axios.put(`api/friends/request/${requestId}`, {}, {
       headers: {
          Authorization: `Bearer ${getToken()}`
       }
@@ -31,7 +31,7 @@ export function declineFriendRequest(requestId) {
 // /api/friends/accept/:userId/friend/:friendId
 
 export function acceptFriendRequest(friendId) {
-   return axios.put(`api/friends/accept/${userId}/friend/${friendId}`, {
+   return axios.put(`api/friends/accept/friend/${friendId}`, {}, {
       headers: {
          Authorization: `Bearer ${getToken()}`
       }

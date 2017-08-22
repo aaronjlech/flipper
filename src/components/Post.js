@@ -13,7 +13,7 @@ const Post = props => {
       <Paper className="post columns small-12 large-6 row">
          <div className="post__image columns small-3 row align-middle align-center">
             <Avatar
-               src="https://randomuser.me/api/portraits/lego/4.jpg"
+               src={_creator.avatar_img}
                size={90}
             />
          </div>

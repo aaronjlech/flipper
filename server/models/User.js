@@ -19,7 +19,9 @@ const userSchema = new mongoose.Schema({
    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }]
 })
 userSchema.pre('save', function(next){
-   console.log(this);
+   if(this.avatar_img) {
+      return next()
+   }
    switch (this.gender) {
 
       case 'male':
