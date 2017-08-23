@@ -4,7 +4,7 @@ export function getToken() {
 
 }
 
-exgport function setToken(token) {
+export function setToken(token) {
       localStorage.setItem("token", token);
 }
 export function setUser(user) {
