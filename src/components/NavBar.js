@@ -1,6 +1,6 @@
 import React from "react";
 import AppBar from "material-ui/AppBar";
-import RequestsIcon from './RequestsIcon'
+import RequestsMenu from './RequestsMenu'
 /**
  * A simple example of `AppBar` with an icon on the right.
  * By default, the left icon is a navigation-menu.
@@ -14,7 +14,7 @@ const NavBar = (props) => {
       title="Flippr"
       className="nav-bar"
       titleStyle={{ textAlign: "center", fontFamily: "Grand Hotel, serif" }}
-      iconElementRight={<RequestsIcon user={user}/>}
+      iconElementRight={<RequestsMenu user={user}/>}
       iconStyleRight={{padding: 0}}
    />)}
 

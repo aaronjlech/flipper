@@ -15,7 +15,9 @@ const controller = {
       })
       user.save((err, updatedUser) => {
          if (err) res.status(500).send(err);
-         res.send({token: createToken(updatedUser)})
+         updatedUser.populate('friends friend_requests', (err, doc) => {
+            res.send({token: createToken(doc)})
+         })
       });
    },
    acceptRequest: (req, res) => {

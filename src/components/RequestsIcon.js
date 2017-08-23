@@ -10,7 +10,9 @@ const RequestsIcon = (props) => (
       style={{padding: 0, color: '#FFF'}}
       badgeStyle={{top: 0, right: 0, padding: 0}}
     >
-      <IconButton tooltip={props.user.friend_requests.length}>
+      <IconButton
+         onClick={props.onClick}
+      >
         <NotificationsIcon color='#FFF'/>
       </IconButton>
     </Badge>

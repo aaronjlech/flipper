@@ -65,38 +65,39 @@ const controller = {
          if (err) {
             return res.status(500).send("");
          } else {
-            console.log("-------");
-            // console.log(password, user.password);
-            console.log("-------");
 
             checkPassword(password, user.password).then(isCorrect => {
                console.log(isCorrect);
                if (isCorrect) {
-                  const {
-                     messages,
-                     likes,
-                     display_name,
-                     username,
-                     friend_requests,
-                     direct_messages,
-                     friends,
-                     _id,
-                     gender,
-                     sent_requests
-                  } = user;
-                  let userInfo = {
-                     messages,
-                     likes,
-                     display_name,
-                     username,
-                     friend_requests,
-                     direct_messages,
-                     friends,
-                     sent_requests,
-                     _id,
-                     gender
-                  };
-                  return res.send({ token: createToken(userInfo) });
+                  user.populate('friend_requests friends', (err, doc) => {
+                     const {
+                        messages,
+                        likes,
+                        display_name,
+                        username,
+                        friend_requests,
+                        direct_messages,
+                        friends,
+                        _id,
+                        gender,
+                        sent_requests
+                     } = doc;     
+                     let userInfo = {
+                        messages,
+                        likes,
+                        display_name,
+                        username,
+                        friend_requests,
+                        direct_messages,
+                        friends,
+                        sent_requests,
+                        _id,
+                        gender
+                     };
+                     return res.send({ token: createToken(userInfo) });
+
+                  })
+
                } else {
                   return res.status(400).send("wrong password or username");
                }
