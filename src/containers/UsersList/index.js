@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import UserCard from "../../components/UserCard";
-
 export default class UserList extends Component {
    render() {
       const currentUser = this.props.User.user;

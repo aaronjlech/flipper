@@ -44,8 +44,11 @@ const controller = {
 
    },
    declineRequest: (req, res) => {
-      req.user.friend_requests.splice(req.params.requestId, 1)
-      user.save((err, updatedUser) => {
+      console.log(req.user);
+      let requestIndex = req.user.friend_requests.indexOf(req.params.friendId)
+      console.log(requestIndex);
+      req.user.friend_requests.splice(requestIndex, 1)
+      req.user.save((err, updatedUser) => {
          if (err) res.status(500).send(err);
          updatedUser.populate('friends friend_requests', (err, withFriends) => {
             res.send(withFriends)
@@ -72,6 +75,6 @@ router.param('friendId', (req, res, next) => {
 router.use(ensureAuthenticated)
 router.put('/send/:friendId', controller.sendRequest);
 router.put('/accept/friend/:friendId', controller.acceptRequest);
-router.put('/decline/request/:requestId/', controller.declineRequest);
+router.put('/decline/friend/:friendId/', controller.declineRequest);
 
 module.exports = router;

@@ -19,8 +19,8 @@ export function sendFriendRequest(friendId) {
 
 // /api/friends/decline/:userId/request/:requestId
 
-export function declineFriendRequest(requestId) {
-   return axios.put(`api/friends/request/${requestId}`, {}, {
+export function declineFriendRequest(friendId) {
+   return axios.put(`api/friends/decline/friend/${friendId}`, {}, {
       headers: {
          Authorization: `Bearer ${getToken()}`
       }

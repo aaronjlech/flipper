@@ -135,6 +135,26 @@ const handleFriendRequest = friendId => {
          .catch(err => dispatch(signupFailure(err)));
    };
 };
+const handleAccept = friendId => {
+   return dispatch => {
+      dispatch(requestUser())
+      return friends.acceptFriendRequest(friendId)
+         .then(res => {
+            return dispatch(receiveUser(res.data))
+         })
+         .catch(err => dispatch(signupFailure(err)))
+   }
+}
+const handleDecline = friendId => {
+   return dispatch => {
+      dispatch(requestUser())
+      return friends.declineFriendRequest(friendId)
+         .then(res => {
+            return dispatch(receiveUser(res.data))
+         })
+         .catch(err => dispatch(signupFailure(err)))
+   }
+}
 export default {
    requestUser,
    receiveUser,
@@ -150,5 +170,7 @@ export default {
    receiveAllUsers,
    requestAllUsers,
    fetchAllUsersIfNeeded,
-   handleFriendRequest
+   handleFriendRequest,
+   handleAccept,
+   handleDecline
 };
