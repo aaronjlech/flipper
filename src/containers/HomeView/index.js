@@ -18,7 +18,7 @@ export default class HomeView extends Component {
    }
    componentDidMount = () => {
       this.props.fetchUserIfNeeded();
-      this.props.fetchAllUsers();
+      this.props.fetchAllUsersIfNeeded();
       this.props.fetchMessagesIfNeeded();
    };
    handleOpen = () => {
@@ -35,9 +35,8 @@ export default class HomeView extends Component {
    render() {
       const { value } = this.state;
       const { User, AllUsers, Messages } = this.props;
-
-      if (!User.token || Messages.isFetching || AllUsers.isFetching) {
-         console.log(Messages.isFetching, AllUsers.isFetching);
+      if (!User.user.username || Messages.isFetching || AllUsers.isFetching) {
+         console.log('waht');
          return <Loading />;
       } else {
          return (

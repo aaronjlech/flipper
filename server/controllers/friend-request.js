@@ -15,8 +15,8 @@ const controller = {
       })
       user.save((err, updatedUser) => {
          if (err) res.status(500).send(err);
-         updatedUser.populate('friends friend_requests', (err, doc) => {
-            res.send({token: createToken(doc)})
+         updatedUser.populate('friends friend_requests', (err, withFriends) => {
+            res.send(withFriends)
          })
       });
    },
@@ -24,32 +24,34 @@ const controller = {
       const { friend, user } = req;
       let sentIndex = user.friend_requests.indexOf(friend._id);
       let friendIndex = friend.sent_requests.indexOf(user._id);
-      if(sentIndex > -1) {
-         user.friend_requests.splice(sentIndex, 1);
-
-         user.friends.push(friend._id);
-         user.save();
-      } else {
-         return res.status(500).send('user noot found');
-      }
-      if(friendIndex > -1) {
+      if(sentIndex > -1 && friendIndex > -1) {
          friend.sent_requests.splice(friendIndex, 1);
          friend.friends.push(user._id);
-         friend.save((err, updatedFriend) => {
-            if(err) return res.status(500).send(err);
-
-            return res.send('you are now friends!');
-         })
+         friend.save((err, updatedFriend) =>{
+            if(err) return res.status(500).send(err)
+         });
+         user.friend_requests.splice(sentIndex, 1);
+         user.friends.push(friend._id);
+         user.save((err, updatedUser) => {
+            if (err) res.status(500).send(err);
+            updatedUser.populate('friends friend_requests', (err, withFriends) => {
+               res.send(withFriends)
+            })
+         });
       } else {
-         return res.status(500).send('user not found');
+         return res.status(500).send('user noot found');
       }
 
    },
    declineRequest: (req, res) => {
       req.user.friend_requests.splice(req.params.requestId, 1)
-      req.user.save((err, updatedUser) => {
-         res.send('declined request');
-      })
+      user.save((err, updatedUser) => {
+         if (err) res.status(500).send(err);
+         updatedUser.populate('friends friend_requests', (err, withFriends) => {
+            res.send(withFriends)
+         })
+      });
+
    }
 }
 

@@ -14,10 +14,10 @@ const receiveMessages = messageData => {
 };
 
 const shouldFetchMessages = state => {
-   if (!state.messages) {
+   if (!state.Messages.messages.length) {
       return true;
    }
-   if (state.isFetching) {
+   if (state.Messages.isFetching) {
       return false;
    }
 };
@@ -30,7 +30,7 @@ const couldNotReceiveMessages = error => {
 };
 
 const fetchMessages = () => dispatch => {
-   dispatch(requestMessages);
+   dispatch(requestMessages());
    return messages
       .getAllMessages()
       .then(res => dispatch(receiveMessages(res.data)))

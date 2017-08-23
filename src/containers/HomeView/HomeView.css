@@ -1,6 +1,6 @@
 .post {
    display: flex;
-   padding: 1rem;
+   padding: .2rem;
 }
 #messageForm{
    outline: 0;

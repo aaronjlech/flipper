@@ -1,16 +1,16 @@
 import { users, friends } from "../../services";
 import history from "../../history";
-import { getToken } from "../../services/auth";
+import { getToken, getUser } from "../../services/auth";
 const requestUser = () => {
    return {
       type: "REQUEST_USER"
    };
 };
-const receiveUser = token => {
-   console.log("username", token);
+const receiveUser = user => {
+   console.log("username", user);
    return {
       type: "RECEIVE_USER",
-      token: token
+      user
    };
 };
 const logoutUser = () => {
@@ -32,14 +32,19 @@ const loginFailure = error => {
       error
    };
 };
+const receiveToken = (token) => {
+   return { type: "RECEIVE_TOKEN", token };
+};
 const loginUser = user => {
+   console.log("this one?");
    return dispatch => {
-      dispatch(requestUser);
+      dispatch(requestUser());
       return users
          .loginUser(user)
          .then(res => {
+            console.log('not in herr');
             history.push("/home");
-            return dispatch(receiveUser(res.data.token));
+            return dispatch(receiveToken(res.data.token));
          })
          .catch(err => dispatch(loginFailure(err)));
    };
@@ -47,18 +52,15 @@ const loginUser = user => {
 
 const signupUser = userData => {
    return dispatch => {
-      dispatch(requestUser);
+      dispatch(requestUser());
       return users
          .createNewUser(userData)
          .then(res => dispatch(receiveUser(res.data)))
          .catch(err => dispatch(signupFailure(err)));
    };
 };
-
 const shouldFetchUser = state => {
-   console.log(state)
-   if (!state.User.user.token) {
-      console.log("what");
+   if (!state.User.user.username) {
       return true;
    }
    if (state.User.isFetching) {
@@ -68,15 +70,15 @@ const shouldFetchUser = state => {
 const fetchUser = () => {
    console.log("dispatching this one");
    return dispatch => {
-      return dispatch(receiveUser(getToken()));
+      return dispatch(receiveUser(getUser()));
    };
 };
 
+
 const fetchUserIfNeeded = () => {
    return (dispatch, getState) => {
-      console.log('herr');
       if (shouldFetchUser(getState())) {
-         dispatch(requestUser)
+         dispatch(requestUser());
 
          return dispatch(fetchUser());
       }
@@ -96,14 +98,14 @@ const requestAllUsers = () => {
 };
 const fetchAllUsers = () => {
    return dispatch => {
-      dispatch(requestAllUsers);
+      dispatch(requestAllUsers());
       return users
          .getAllUsers()
          .then(res => dispatch(receiveAllUsers(res.data)));
    };
 };
 const shouldFetchAllUsers = state => {
-   if (state.AllUsers.allUsers) {
+   if (!state.AllUsers.allUsers.length) {
       return true;
    } else {
       return false;
@@ -112,7 +114,7 @@ const shouldFetchAllUsers = state => {
 const fetchAllUsersIfNeeded = () => {
    return (dispatch, getState) => {
       if (shouldFetchAllUsers(getState())) {
-         dispatch(fetchAllusers());
+         return dispatch(fetchAllUsers());
       }
    };
 };
@@ -122,16 +124,17 @@ const receiveAllUsers = data => {
       allUsers: data
    };
 };
-const handleFriendRequest = (friendId) => {
-   return (dispatch) => {
-      return friends.sendFriendRequest(friendId)
-         .then(res =>{
-            console.log(res.data)
-            return dispatch(receiveUser(res.data.token))
+const handleFriendRequest = friendId => {
+   return dispatch => {
+      return friends
+         .sendFriendRequest(friendId)
+         .then(res => {
+            console.log(res.data);
+            return dispatch(receiveUser(res.data));
          })
          .catch(err => dispatch(signupFailure(err)));
-   }
-}
+   };
+};
 export default {
    requestUser,
    receiveUser,

@@ -7,7 +7,7 @@ import RequestsMenu from './RequestsMenu'
  */
 const NavBar = (props) => {
    const { user } = props.User
-   console.log(user);
+
    return (
       <AppBar
       style={{ position: "fixed", backgroundColor: "#000", color: '#FFF' }}

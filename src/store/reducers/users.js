@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { getToken, setToken, removeToken } from "../../services/auth";
+import { getToken, setToken, removeToken, setUser, removeUser } from "../../services/auth";
 import history from "../../history";
 
 const AllUsers = (
@@ -33,19 +33,29 @@ const User = (
    action
 ) => {
    switch (action.type) {
+      case "RECEIVE_TOKEN":
+      console.log('hello?');
+      setToken(action.token);
+      let userData = jwtDecode(action.token);
+      setUser(userData.user)
+      return Object.assign({}, state, {
+         isFetching: false,
+         isLoggedIn: true,
+         token: action.token,
+         user: userData.user
+      });
       case "REQUEST_USER":
          return Object.assign({}, state, { isFetching: true });
       case "RECEIVE_USER":
-         setToken(action.token);
-         let userData = jwtDecode(action.token);
+         setUser(action.user)
          return Object.assign({}, state, {
             isFetching: false,
-            isLoggedIn: true,
-            token: action.token,
-            user: userData.user
-         });
+            user: action.user
+          });
+
       case "LOGOUT_USER":
          removeToken();
+         removeUser();
          history.push("/");
          return Object.assign({}, state, {
             isLoggedIn: false,
