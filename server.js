@@ -5,15 +5,19 @@ const validator = require('validator');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const webpackConfig = require('./webpack.config.js');
-const passport = require('passport');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
 const morgan = require('morgan');
-const models = require('./server/models');
 const controller = require('./server/controllers');
+const uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL || 'mongodb://localhost:27017/flipper_db'
 
-
-mongoose.connect('mongodb://localhost:27017/flipper_db');
+mongoose.connect(uristring, (err, res) => {
+        if (err) {
+      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+      } else {
+      console.log ('Succeeded connected to: ' + uristring);
+      }
+});
 
 
 const app = express();
@@ -38,7 +42,7 @@ app.use('/api/messages', controller.messagesController);
 app.use('/api/likes', controller.likesController);
 app.use('/api/friends', controller.friendsController);
 
-const server = app.listen(3001, function() {
+const server = app.listen(process.env.PORT || 3001, function() {
   const host = server.address().address;
   const port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);

@@ -47,6 +47,7 @@ router.param('messageId', (req, res, next) => {
       }
    })
 })
+
 router.use(ensureAuthenticated)
 router.put('/message/:messageId', controller.handleLike);
 

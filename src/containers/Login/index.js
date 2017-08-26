@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper'
 import { users } from '../../services';
 import SignUpModal from '../SignUpModal';
+import Logo from '../../components/Logo';
 import './Login.css';
 
 const loginBoxStyles = {
@@ -38,7 +39,9 @@ export default class Login extends Component {
       const { username, password } = this.state;
       return(
          <div className="login container">
-            <h1 className="flippr">Flippr</h1>
+            <div className="logo_container">
+               <img src="./images/icons/Flippr_logo.svg" alt=""/>
+            </div>
             <Paper style={loginBoxStyles} rounded={false}>
                <form className="pure-u-12" onSubmit={this.handleLogin} style={{textAlign: 'center', borderRadius: "4px"}}>
 

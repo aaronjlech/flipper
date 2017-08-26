@@ -35,7 +35,7 @@ export default class HomeView extends Component {
    render() {
       const { value } = this.state;
       const { User, AllUsers, Messages } = this.props;
-      if (!User.user.username || Messages.isFetching || AllUsers.isFetching) {
+      if (!User.user.username) {
          console.log('waht');
          return <Loading />;
       } else {

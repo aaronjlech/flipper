@@ -13,7 +13,8 @@ import "./App.css";
 class App extends Component {
    render() {
       const { User, AllUsers, Messages } = this.props;
-      if (User.isFetching || Messages.isFetching || AllUsers.isFetching) {
+      if (!User.user) {
+         console.log('heu');
          return <Loading />;
       } else {
          return (
