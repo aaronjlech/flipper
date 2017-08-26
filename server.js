@@ -21,7 +21,7 @@ mongoose.connect(uristring, (err, res) => {
 
 
 const app = express();
-const compiler = webpack(webpackConfig);
+// const compiler = webpack(webpackConfig);
 app.use(express.static(__dirname + '/public'));
 
 // app.use(webpackDevMiddleware(compiler, {
