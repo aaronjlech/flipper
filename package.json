@@ -2,7 +2,7 @@
   "name": "simple-setup",
   "version": "1.0.0",
   "description": "A simple project boiler-plate",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "compile": "webpack",
     "start": "node server.js",
