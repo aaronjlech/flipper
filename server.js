@@ -8,7 +8,7 @@ const webpackConfig = require('./webpack.config.js');
 const morgan = require('morgan');
 const controller = require('./server/controllers');
 const uristring =
-    process.env.MONGOLAB_URI ||
+    process.env.MONGOLAB_IVORY_URI ||
     process.env.MONGOHQ_URL || 'mongodb://localhost:27017/flipper_db'
 
 mongoose.connect(uristring, (err, res) => {
