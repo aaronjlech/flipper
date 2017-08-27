@@ -5,6 +5,7 @@ import Navigation from 'material-ui/svg-icons/navigation/menu';
 import MenuItem from 'material-ui/MenuItem';
 
 const NavMenu = (props) => {
+
    return (
       <IconMenu
  iconButtonElement={<IconButton><Navigation color="#FFF" /></IconButton>}
@@ -12,7 +13,7 @@ const NavMenu = (props) => {
  targetOrigin={{horizontal: 'left', vertical: 'top'}}
 >
  <MenuItem primaryText="Send feedback" />
- <MenuItem primaryText="Sign out" onClick={()=> console.log('hey')}/>
+ <MenuItem primaryText="Sign out" onClick={()=> props.logoutUser()}/>
 </IconMenu>
    )
 }

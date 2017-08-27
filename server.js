@@ -1,10 +1,10 @@
 const express = require('express');
-// const webpackDevMiddleware = require('webpack-dev-middleware');
-// const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpack = require('webpack');
 const validator = require('validator');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config.js');
 const morgan = require('morgan');
 const controller = require('./server/controllers');
 const uristring =
@@ -21,18 +21,18 @@ mongoose.connect(uristring, (err, res) => {
 
 
 const app = express();
-// const compiler = webpack(webpackConfig);
+const compiler = webpack(webpackConfig);
 app.use(express.static(__dirname + '/public'));
 
-// app.use(webpackDevMiddleware(compiler, {
-//   hot: true,
-//   filename: 'bundle.js',
-//   publicPath: '/',
-//   stats: {
-//     colors: true,
-//   },
-//   historyApiFallback: true,
-// }));
+app.use(webpackDevMiddleware(compiler, {
+  hot: true,
+  filename: 'bundle.js',
+  publicPath: '/',
+  stats: {
+    colors: true,
+  },
+  historyApiFallback: true,
+}));
 app.use(bodyParser.json());
 
 

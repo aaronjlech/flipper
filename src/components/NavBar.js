@@ -12,10 +12,10 @@ const NavBar = (props) => {
    return (
       <div className="title-bar nav-bar">
  <div className="title-bar-left">
-    <NavMenu/>
+    <NavMenu {...props}/>
  </div>
  <div className="title-bar-center">
-     <img src="./images/icons/Flippr_logo.svg" alt=""/>
+     <img className='nav-logo' src="./images/icons/Flippr_logo.svg" alt=""/>
  </div>
  <div className="title-bar-right">
     <RequestsMenu user={user} handleAccept={props.handleAccept} handleDecline={props.handleDecline}/>

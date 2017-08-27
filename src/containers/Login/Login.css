@@ -45,4 +45,5 @@ body{
 .logo_container{
    margin: 0 auto;
    width: 20%;
+   min-width: 200px;
 }

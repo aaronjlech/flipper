@@ -4,6 +4,7 @@
 }
 #messageForm{
    outline: 0;
+   font-size: 16px;
    -webkit-appearance: none;
 }
 .nav-bar {
@@ -13,7 +14,7 @@
    top: 0;
 
 }
-.nav-bar img{
+.nav-logo{
    width: 80px;
 }
 .mobile-nav {

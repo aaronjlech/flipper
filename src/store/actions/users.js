@@ -55,7 +55,10 @@ const signupUser = userData => {
       dispatch(requestUser());
       return users
          .createNewUser(userData)
-         .then(res => dispatch(receiveUser(res.data)))
+         .then(res => {
+               history.push('/home');
+               return dispatch(receiveToken(res.data.token))
+            })
          .catch(err => dispatch(signupFailure(err)));
    };
 };

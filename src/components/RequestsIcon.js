@@ -13,7 +13,6 @@ const RequestsIcon = (props) => (
       <IconButton
          onClick={props.onClick}
       >
-        <NotificationsIcon color='#FFF'/>
       </IconButton>
     </Badge>
 );
