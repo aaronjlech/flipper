@@ -8,6 +8,7 @@ import history from "../../history";
 import Login from "../Login";
 import HomeView from "../HomeView";
 import Loading from "../../components/Loading";
+import FriendsList from '../FriendsList';
 import "./App.css";
 
 class App extends Component {
@@ -32,6 +33,11 @@ class App extends Component {
                      path="/home"
                      render={props => <HomeView {...props} {...this.props} />}
                   />
+                  <Route
+                    exact 
+                    path="/friends"
+                    render={props => <FriendsList {...props} {...this.props}/>}
+                    />
                </Switch>
             </HashRouter>
          );

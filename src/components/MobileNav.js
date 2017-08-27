@@ -16,11 +16,11 @@ const MobileNav = props => {
          <Tabs value={props.value} onChange={props.handleSlide} style={styles}>
             <Tab
                value={0}
-               icon={<FontIcon className="material-icons">face</FontIcon>}
+               icon={<FontIcon className="icon-MyAccount_icon"></FontIcon>}
             />
             <Tab
                value={1}
-               icon={<FontIcon className="material-icons">home</FontIcon>}
+               icon={<FontIcon className="icon-FlippFeed_icon"></FontIcon>}
             />
             <Tab value={2} onActive={props.handleOpen} icon={<AddIcon />} />
          </Tabs>

@@ -80,7 +80,8 @@ const controller = {
                         friends,
                         _id,
                         gender,
-                        sent_requests
+                        sent_requests,
+                        avatar_img
                      } = doc;     
                      let userInfo = {
                         messages,
@@ -92,7 +93,8 @@ const controller = {
                         friends,
                         sent_requests,
                         _id,
-                        gender
+                        gender,
+                        avatar_img
                      };
                      return res.send({ token: createToken(userInfo) });
 

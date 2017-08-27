@@ -35,6 +35,7 @@ export default class PostModal extends React.Component {
    };
 
    render() {
+       const { user } = this.props.User
       const { message } = this.state;
       const wordLength = 170 - message.length;
       const isFilled =
@@ -64,12 +65,12 @@ export default class PostModal extends React.Component {
                <div className="message__user-info">
                   <div className="user-info__avatar">
                      <Avatar
-                        src="https://randomuser.me/api/portraits/lego/4.jpg"
+                        src={user.avatar_img}
                         size={50}
                      />
                   </div>
                   <div className="user-info__content">
-                     <h4>@Bill</h4>
+                     <h4>{user.display_name}</h4>
                      <p className="content__word-length">
                         {wordLength}
                      </p>
